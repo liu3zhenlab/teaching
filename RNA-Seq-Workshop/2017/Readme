@@ -1,0 +1,9 @@
+Here are slides for 2017 IGF RNA-Seq Workshop at the Kansas State University. Slides were prepared and presented by Sanzhen Liu.
+
+Note 1: Rmd files were used to generate two lab html files and then PDF files. These Rmd files can be downloaded first and run in RStudio to generate html slides.
+
+Note 2: html to PDF
+Following https://github.com/astefanutti/decktape to install decktape. After the installaton, run the following code to convert a html to a PDF
+
+phantomjs decktape.js -RNASeq2017-R.html RNASeq2017-R.pdf
+

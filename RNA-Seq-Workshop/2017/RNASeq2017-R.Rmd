@@ -1,0 +1,425 @@
+---
+class: inverse,center,middle
+title: "Lab 4: Learning R"
+subtitle: "IGF RNA-Seq Workshop 2017"
+author: "Sanzhen Liu"
+date: "6/22/2017"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+### Outline
+- Introduction of R
+
+- Data structure (vector and data frame)
+
+- Data importing and exporting
+
+- Plotting
+
+- String operations
+
+---
+### Why R?
+- R is great at statistical computing and graphics
+- R is free
+- R has great community supports
+
+***
+<div align="center">
+<img src="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/images/Rpopularity.png" width=300 height=400>
+</div>
+
+---
+### R example 1 (R for statistics)
+
+Chi-square test
+```{r, comment=""}
+d <- c(12, 36, 24, 70)
+dm <- matrix(d, nrow=2, byrow=T)
+dm
+chisq.test(dm)
+```
+
+---
+### R example 2 (R for graphs)
+```{r xcard, echo=T, fig.height = 5, results='hide', dev='png', fig.align='center'}
+ts="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/codes/xcard.R"
+source(ts)
+```
+
+---
+### R example 2 code
+<div align="center">
+<img src="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/images/xcs.png" width=250 height=500>
+</div>
+
+---
+### R example 3 (R for graphs)
+```{r cost, echo=T, fig.height = 6.5, fig.width = 10, results='hide', dev='png', fig.align='center'}
+cs="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/codes/trend.R"
+source(cs)
+```
+
+---
+### Where can we use R?
+**Rstudio** is an open source integrated development environment (IDE) for R
+
+* On your own machine (Rstudio Desktop)
+  + Download and install [R](http://cran.r-project.org/mirrors.html)
+  + Download and install [Rstudio](https://www.rstudio.com/products/RStudio/)
+
+* Use Rstudio at Beocat (Rstudio server)
+  + [rstudio.beocat.cis.ksu.edu](rstudio.beocat.cis.ksu.edu)
+  + Your **KSU ID** and **password** to login
+
+---
+### Rstudio at Beocat
+[rstudio.beocat.cis.ksu.edu](rstudio.beocat.cis.ksu.edu)
+
+<div align="center">
+<img src="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/images/beocat.login.png" width=600 height=400>
+</div>
+
+---
+### Rstudio interface
+
+<div align="center">
+<img src="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/images/Rstudio.png" width=650 height=500>
+</div>
+
+
+---
+### Getting started, R commands
+**Expression**: evaluated, printed, and the value lost
+```{r, comment=""}
+2 + 4
+68 * 0.15
+```
+
+**Assignment** assign values to a variable  
+evaluated, the value passed to a variable but NOT printed
+
+_assignment operator_: **<-** or **=**
+
+```{r, comment=""}
+y <- 2
+y = 2
+info <- "hello world"
+cat(info)
+```
+
+---
+### Notes
+- Comments (#):
+Notes to scripts, starting with a hashtag (‘#’), everything to the end of the line is a comment.  
+
+y <- 2 + 4  # an example of the assignment
+
+- Variable names are case senstive
+```{r, comment=""}
+y <- 2
+Y <- 3
+y
+Y
+```
+---
+### Executing commands
+
+- PC window: control + return (enter)
+
+- Apple MAC: command + return (enter)
+
+<div align="center">
+<img src="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/images/Rstudio.png" width=500 height=400>
+</div>
+
+---
+### vector: multiple elements
+A vector is a single entity consisting of an ordered collection of numbers, characters, logical quantities, etc.
+
+concatenate command: **c()**
+
+- Numeric vector  
+  c(10.4, 5.6, 3.1, 6.4, 21.7)
+  
+- Logical vector   
+  c(TRUE, FALSE, TRUE, TRUE)
+  
+- Character vector  
+  c("a", "b", "c")
+  
+- Missing value (NA, not available)  
+  c("a", "b", "c", NA)
+
+---
+### vector manipulation (I)
+```{r, comment=""}
+# Numeric vector
+x <- c(10.4, 5.6, 3.1, 6.4, 21.7)
+sum(x)
+2*x
+
+### extract 2nd elements
+x[2]
+```
+
+---
+### vector manipulation (II)
+# Logical vector
+lv <- c(TRUE, FALSE, TRUE, TRUE)
+!lv
+lv == FALSE
+
+---
+### vector manipulation (III)
+```{r, comment=""}
+# Character vector
+cv <- c("a", "b", "c")
+cv2 <- paste(cv, 1:3, sep="")
+cv2
+
+# Missing value
+mvv <- c("a", "b", "c", NA)
+is.na(mvv)
+```
+
+---
+### vector manipulation (IV)
+Vectors must have their values with the same mode, either numeric, character, logical, or other types.
+
+**conversion to other modes**
+```{r, comment=""}
+z <- 0:9
+is.numeric(z)
+digits <- as.character(z) # convert to character
+d <- as.numeric(digits) # convert to numeric
+```
+
+---
+### vector manipulation (V)
+- Select a subset of a vector
+```{r, comment=""}
+x <- c(4, 5, 7, 3, 9)
+x[c(2, 3)]
+x[x>6]
+x[-c(1, 5)]
+```
+- Modify a vector
+```{r, comment=""}
+x[3] <- 23.1
+c(x, 10.9)
+x[-2]
+length(x) <- 2  # retain just the first 2 values
+x
+```
+---
+### Question 1
+Can a vector contain different types of elements?
+
+```{r, eval = F}
+c(1, "a")
+c(1, TRUE)
+c(TRUE, "a")
+c(1, "a", TRUE)
+```
+
+---
+### Data frame
+A data frame may be regarded as a matrix (table) with columns possibly of differing modes
+
+- Making data frames
+```{r, comment=""}
+df <- data.frame(name=c("Josh", "rose"), age=c(23, 35))
+df
+```
+
+---
+### Working with a data frame
+```{r, comment=""}
+df
+```
+
+Trying these commands:
+```{r, eval = F}
+head(df, 1)
+tail(df, 1)
+str(df)
+df[2, 1]
+df[2, 2]
+df[2]
+df[, 2]
+```
+
+---
+### Importing data
+**read.table()**: to read a data frame (table)  
+**read.delim**, **read.csv**
+
+```{r, comment=""}
+cpm="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/data/cs.txt"
+d <- read.delim(cpm)
+head(d, 3)
+```
+
+<div align="center">
+<img src="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/images/cost.png" width=350 height=250>
+</div>
+
+---
+### Exporting data
+**write.table()** or **write.csv()**
+
+To write a tab-delimited file
+```{r, eval = F}
+x <- data.frame(a = "pi", b = pi)
+write.table(x, file="foo.txt", sep="\t", row.names=FALSE)
+```
+
+- file="foo.txt": foo.txt is the ouput file name
+- sep="\t": separated by a tab (\t)
+- row.names=FALSE: row names are not included in the output
+
+---
+### Problem
+- Create a data frame  
+
+  three columns: 1. Name 2. Major 3. Gender  
+  three rows (entries): your neighbors and you
+
+- Write the data frame to an output file
+
+- Read the file to R and add one more column
+(e.g., favorite color)
+
+---
+### Plotting: plot()
+High-level plot: create a new plot
+
+plot(x, y, xlab, ylab, main, …)
+
+<div align="center">
+<img src="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/images/plot.png" width=500 height=450>
+</div>
+
+---
+### Adding contents to a plot
+Low-level plot: add to an existing plot
+- add points  
+**points()**
+
+- add lines  
+**lines()**
+
+- add text or legend  
+**text()**  
+**legend()**
+
+---
+### Scatter plot
+```{r scatter, echo=T, fig.height = 5, results='hide', dev='png', fig.align='center'}
+area <- state.x77[, "Area"]
+pop <- state.x77[, "Population"]
+# scatter plot
+plot(area, pop, main="US1977")
+# label points
+points(area["Kansas"], pop["Kansas"], col="purple",
+       lwd=2, pch=19, cex=2)
+```
+
+---
+### Boxplot
+```{r boxplot, echo=T, fig.height = 6, results='hide', dev='png', fig.align='center'}
+barplot(pop/1000, las=2, cex.names=0.65, ylab="Pop (x1000,000)",
+        main="US 1977 Population")
+```
+
+---
+### Histogram
+```{r histogram, echo=T, fig.height = 6, results='hide', dev='png', fig.align='center'}
+hist(pop, ylab="Number of states", main="US 1977 Population")
+```
+
+---
+### String operations - nchar
+**nchar()**
+nchar the sizes of the corresponding elements of a vector.
+
+```{r, comment=""}
+cvec <- c("google", "hello", "the", "world")
+nchar(cvec)
+```
+
+---
+### String operations - grep
+**grep()**
+grep searches for matches to argument pattern within each element of a character vector
+
+```{r, comment=""}
+cvec
+grep("o", cvec)
+```
+---
+### String operations – sub and gsub
+**sub()** and **gsub()**
+sub and gsub perform replacement of the first and all matches respectively.
+
+```{r, comment=""}
+cvec
+sub("o", "O", cvec)
+gsub("o", "O", cvec)
+```
+
+---
+### Package installation
+Prepare for Lab 5: RNA-Seq analysis
+```{r, eval = F}
+# DESeq2
+source("http://bioconductor.org/biocLite.R")
+biocLite("DESeq2")
+
+# GOSeq
+biocLite("goseq")
+
+# GO.db
+biocLite("GO.db")
+```
+
+---
+### Getting help
+Usage of commands
+- help(nchar)
+- ?nchar
+- ??colsum
+
+[R Reference Card](https://cran.r-project.org/doc/contrib/Short-refcard.pdf)
+
+- [stack overflow](https://stackoverflow.com/)
+- [google](https://google.com)
+
+Learning R at [swirlstats](http://swirlstats.com)
+
+
+---
+### Adventure with R
+<div align="center">
+<img src="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/images/Radventure.png" width=800 height=500>
+</div>
+http://www.nature.com/news/programming-tools-adventures-with-r-1.16609
+
+---
+### Contact information
+Sanzhen Liu  
+Plant Pathology  
+4022B Throckmorton Plant Sciences Center  
+Manhattan, KS 66506-5502  
+phone: 785-532-1379  
+
+[liu3zhen@ksu.edu](liu3zhen@ksu.edu)  
+twitter: [liu3zhen](https://twitter.com/liu3zhen?lang=en)
+

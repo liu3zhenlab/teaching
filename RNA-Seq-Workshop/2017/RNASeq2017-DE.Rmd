@@ -1,0 +1,321 @@
+---
+class: inverse,center,middle
+title: "Lab 5: Differential Expression via RNA-Seq Analysis"
+subtitle: "IGF RNA-Seq Workshop 2017"
+author: "Sanzhen Liu"
+date: "6/23/2017"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+### Outline
+- Differential expression test using DESeq2
+
+- Result visualization
+
+- GO enrichment test
+
+---
+### Rstudio at Beocat
+[rstudio.beocat.cis.ksu.edu](rstudio.beocat.cis.ksu.edu)
+
+<div align="center">
+<img src="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/images/beocat.login.png" width=600 height=400>
+</div>
+
+---
+### Rstudio interface
+
+<div align="center">
+<img src="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/images/Rstudio.png" width=650 height=500>
+</div>
+
+---
+### Package installation
+
+```{r, eval = F}
+# DESeq2
+source("http://bioconductor.org/biocLite.R")
+biocLite("DESeq2")
+
+# GOSeq
+biocLite("goseq")
+
+# GO.db
+biocLite("GO.db")
+```
+
+---
+### preload modules
+```{r, error=FALSE, message=FALSE}
+pls="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/codes/load.R"
+source(pls)
+```
+
+- panel.cor2
+- rnaseq.pca
+- normalization
+
+---
+### Read expression data (Read counts per gene)
+
+```{r, comment=""}
+rc="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/data/rc.txt"
+grc <- read.delim(rc)
+nrow(grc)  # the number of rows/lines
+head(grc, 1)  # show the first 1 rows
+tail(grc, 1)  # show the last 1 rows
+```
+
+---
+### RPKM normalization
+```{r, comment="", results = "hide", message = F, error = F}
+datacols <- c("ck_rep1", "ck_rep2", "ck_rep3",
+              "trt_rep1", "trt_rep2", "trt_rep3")
+lib.sizes <- colSums(grc[, datacols])
+exon.sizes <- grc$ExonSize
+grcn <- normalization(counts = grc,
+                      normcolname = datacols,
+                      libsize = lib.sizes,
+                      exonsize = exon.sizes,
+                      methods = "RPKM")
+head(grcn)
+```
+
+```{r, comment="", echo = F}
+head(grcn, 2)
+```
+
+---
+### data organization for DESeq2
+- count information
+```{r, comment=""}
+geneid <- grc$Gene
+in.data <- as.matrix(grc[, 3:8])
+head(in.data, 1)
+# sample names and grouping information (treatment)
+sample.ids <- colnames(in.data)
+treatment <- c("ck", "ck", "ck", "trt", "trt", "trt")
+sample.info <- data.frame(row.names=sample.ids, trt=treatment)
+sample.info
+```
+
+---
+### Differential expression test
+
+```{r, comment="", results="hide", message=F}
+dds <- DESeqDataSetFromMatrix(countData=in.data,
+                              colData=sample.info,
+                              formula(~trt))
+dds <- DESeq(dds)
+```
+
+---
+### DE output
+```{r, comment=""}
+res <- results(dds)
+res <- data.frame(res)
+res$Gene <- geneid
+res <- res[,c("Gene","baseMean","log2FoldChange","pvalue","padj")]
+nrow(res)
+```
+
+---
+### DE + normalized data
+```{r, comment=""}
+### Merge the normalized result with the DE result
+out <- merge(grcn, res, by = "Gene")
+out <- data.frame(out)
+head(out, 2)
+```
+
+---
+### significantly DEG
+
+#### significant gene sets at different FDRs
+```{r, comment=""}
+sum(!is.na(out$padj) & out$padj < 0.05)
+sum(!is.na(out$padj) & out$padj < 0.1)
+sum(!is.na(out$padj) & out$padj < 0.15)
+sum(!is.na(out$padj) & out$padj < 0.2)
+```
+
+---
+### p-value histogram
+```{r, fig.height = 5, results='hide', dev='png', fig.align='center'}
+pvals <- out$pvalue
+hist(pvals,main="Histogram",xlab="p-values",ylab="Number of genes")
+```
+---
+### scatter plot - raw counts
+```{r, fig.height = 5, dev='png', fig.align='center'}
+x.raw <- out$ck_rep1
+y.raw <- out$ck_rep2
+drange <- range(x.raw, y.raw, finite=T)
+# plot a scatter plot between two samples
+plot(x.raw, y.raw, xlab="control rep1", ylab="control rep2",
+	xlim = drange, ylim = drange, main = "Raw counts")
+abline(a = 0, b = 1, col = "orange")
+```
+
+---
+### scatter plot - RPKM
+```{r, fig.height = 5, dev='png', fig.align='center'}
+x <- log(out$ck_rep1.RPKM)
+y <- log(out$ck_rep2.RPKM)
+drange <- range(x, y, finite=T)
+plot(x, y, xlab = "control rep1", ylab = "control rep2",
+	xlim = drange, ylim = drange, main = "log of RPKM")
+abline(a = 0, b = 1, col = "orange")
+```
+
+---
+### pair-wise scatter plots
+```{r, fig.height = 6, dev='png', fig.align='center'}
+logrpkm <- log(out[, 9:14])
+pairs(logrpkm, lower.panel=panel.smooth, upper.panel=panel.cor2)
+```
+
+---
+### Principal Component Analysis (PCA)
+<div align="center">
+<img src="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/images/pca.slide.png" width=750 height=400>
+</div>
+
+---
+### function / module
+You can write your own function:  
+fun_name <- function (…) {
+  ...
+}
+```{r, comment=""}
+gpa_improve <- function(gpa, rate) {
+### gpa: a numeric vector for GPAs
+### rate: percentage for the improvement
+	new.gpa <- gpa * (1 + rate)
+	new.gpa[new.gpa > 4] <- 4	
+	return(new.gpa)
+}
+
+### running the function
+our.gpa <- c(3.8, 3.3, 2.8, 3.1)
+gpa_improve(our.gpa, 0.1)
+gpa_improve(our.gpa, 0.2)
+```
+
+---
+### PCA function
+
+**principal component analysis and ploting**
+```{r, eval = F}
+rnaseq.pca <- function(norm.data,  
+  norm.feature="RPKM",  
+	group.feature,  
+	title="",  
+  shape.code=NULL,  
+	mean.cutoff=0.1,  
+	colors=NULL,
+	scaling=T, ...) {  
+	…  
+}
+```
+
+---
+### PCA plotting
+```{r, fig.height = 5.5, dev='png', fig.align='center'}
+rnaseq.pca(out, norm.feature="RPKM", group.feature=c("ck", "trt"),
+           cex=3, shape.code=c(5, 16), mean.cutoff=0.1, scaling = T,
+           title="PCA-all genes", colors=c("dark green","orange"))
+```
+
+---
+### MA plot
+```{r, fig.height = 4.5, dev='png', fig.align='center'}
+aval <- log(out$baseMean)
+mval <- out$log2FoldChange
+sig.set <- which(out$padj < 0.05)
+plot(aval, mval, xlab="log(mean of exp)", ylab="log2FC",
+     ylim=c(-4, 6), pch=19, cex=0.3,col="blue",main="MA plot")
+# add points and a horizontal line
+points(aval[sig.set], mval[sig.set], pch=19,cex=0.3,col="red")
+abline(h = 0, cex = 1, col = "dark green")
+```
+
+---
+### Volcano plot
+```{r, fig.height = 4, dev='png', fig.align='center'}
+log2val <- out$log2FoldChange  # log2 fold change
+mlogP <- -log10(out$pvalue) # transformed p-values
+### plot
+plot(log2val, mlogP, xlab="log2FC", ylab="-log10(p-value)", pch=19,
+cex=0.4,col="grey", xlim=c(-6,6), ylim=c(0,16), main="Volcano plot")
+### highlight
+up <- which(out$padj<0.05 & log2val > 0) # up
+down <- which(out$padj<0.05 & log2val < 0)  # down
+points(log2val[up], mlogP[up], pch=19,cex=0.4,col="brown")
+points(log2val[down], mlogP[down],pch=19,cex=0.4,col="blue")
+```
+
+---
+### Gene ontology (GO) enrichment analysis
+- a gene and GO association table
+
+- a list of all genes
+
+- a list of significant genes
+
+- mean or total gene read counts per gene (**optional**)
+
+---
+### GOSeq (I)
+```{r, fig.height = 4.5, dev='png', fig.align='center', message=F, warning=F}
+gdbf="http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/data/go.txt"
+godb <- read.delim(gdbf)
+geneid <- as.character(out$Gene)  # gene vector
+# a vector to indicate if the gene is DE (0 or 1)
+de.vector <- as.integer(!is.na(out$padj) & out$padj < 0.05)
+names(de.vector) <- geneid
+countbias <- out$baseMean # total raw reads per gene
+# bias fitting
+pwf.counts <- nullp(DEgenes=de.vector, bias.data=countbias)
+```
+
+---
+### GOSeq (II)
+```{r, fig.height = 4.5, dev='png', fig.align='center', message=F, comment="", results="hide", error=F}
+go <- goseq(pwf=pwf.counts, gene2cat=godb, method="Sampling",
+		repcnt = 1000, use_genes_without_cat = F)  # GO enrichment
+```
+```{r, comment=""}
+head(go, 1)
+example.go <- GOTERM[["GO:0004175"]]  # GO information
+Definition(example.go)  # return GO definition
+```
+
+---
+## Summary
+
+1. Read counts per gene
+
+2. DE analysis based on the experimental design
+
+3. Examine results (p-value distribution, number of significant genes)
+
+4. Gene Ontology enrichment test
+
+---
+### Contact information
+Sanzhen Liu  
+Plant Pathology  
+4022B Throckmorton Plant Sciences Center  
+Manhattan, KS 66506-5502  
+phone: 785-532-1379  
+
+[liu3zhen@ksu.edu](liu3zhen@ksu.edu)  
+twitter: [liu3zhen](https://twitter.com/liu3zhen?lang=en)
+
