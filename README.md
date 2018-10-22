@@ -1,6 +1,6 @@
 # teaching
 Teaching materials
 
-### PLPTH813
-### RNA-Seq workshop
+1. PLPTH813
+2. RNA-Seq workshop
 
