@@ -42,7 +42,7 @@ PART 5. Paper presentations to cover the following six topics
 4.	RNA-Seq (analysis methods, small RNA, non-coding RNA, circle RNA)
 5.	Metagenomics
 6.	New genome technologies and new bioinformatics tools  
-** The course content will be adjusted according to the advance of computational tools and the interests of course audience.
+The course content will be adjusted according to the advance of computational tools and the interests of course audience.
 
 #### Other notes
 We will use the software R throughout the course. Students in the class are required to have the Beocat account that allows you to access the Beocat server and use R-studio through Beocat.
