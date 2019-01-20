@@ -41,7 +41,7 @@ PART 5. Paper presentations to cover the following six topics
 3.	Genetic mapping (QTL, GWAS, and post-GWAS)
 4.	RNA-Seq (analysis methods, small RNA, non-coding RNA, circle RNA)
 5.	Metagenomics
-6.	New genome technologies and new bioinformatics tools
+6.	New genome technologies and new bioinformatics tools  
 ** The course content will be adjusted according to the advance of computational tools and the interests of course audience.
 
 #### Other notes
