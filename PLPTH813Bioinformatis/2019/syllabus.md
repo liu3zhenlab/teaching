@@ -1,14 +1,14 @@
 ### Bioinformatics Applications - PLPTH813
 
-*Course*: PLPTH813 - Bioinformatics Applications, Spring 2019
-*Instructor*: Sanzhen Liu, Plant Pathology, Kansas State University
-*Contact information*: liu3zhen@ksu.edu, 785-532-1379
+**Course**: PLPTH813 - Bioinformatics Applications, Spring 2019
+**Instructor**: Sanzhen Liu, Plant Pathology, Kansas State University
+**Contact information**: liu3zhen@ksu.edu, 785-532-1379
 
-*Location*:	4023 Throckmorton Plant Sciences Center
-*Time*:		Tuesday, Thursday 11:00am-11:50pm (lectures)
+**Location**:	4023 Throckmorton Plant Sciences Center
+**Time**:		Tuesday, Thursday 11:00am-11:50pm (lectures)
                              Thursday 1:00-2:30pm (lab)
-*Office*:		4729 Throckmorton Plant Sciences Center
-*Office hours*:	Tuesday 12:00-1pm
+**Office**:		4729 Throckmorton Plant Sciences Center
+**Office hours**:	Tuesday 12:00-1pm
 
 #### Goal of the course
 PLPTH813 will cover the basic principle of regular bioinformatics applications and emphasize the practice of bioinformatics in biological research. The course will introduce some useful computation skills, such as Unix commands and R programming, in data analysis at the beginning of the semester, and then will apply these skills throughout the course. This course will be focused on the application of bioinformatics in next-generation sequencing (NGS) data analysis, including genome assembly, variant discovery, genotyping, RNA-Seq, and so on. The ultimate goal of this course is to help students to be prepared for the next-generation biological research that often generates large data and requires researchers to have the capability in data management and data mining. 
