@@ -31,7 +31,7 @@ PART 4. Application of NGS in Genomics
 4.	Phylogeny
 5.	Genetic mapping (QTL and association)
 6.	Genome assembly (assembly tools and evaluation)
-7.	Comparative genomics and pan-genomics
+7.	Comparative genomics
 8.	Metagenomics
 9.	RNA-Seq (technology, experimental design and differential expression)
 PART 5. Paper presentations to cover the following six topics
