@@ -5,7 +5,7 @@
 **Contact information**: liu3zhen@ksu.edu, 785-532-1379  
 
 **Location**:	4023 Throckmorton Plant Sciences Center  
-**Time**:		Tuesday, Thursday 11:00am-11:50pm (lectures); Thursday 1:00-2:30pm (lab)  
+**Time**:		Tuesday, Thursday 10:30am-11:20pm (lectures); Thursday 12:30-2:00pm (lab)  
 **Office**:		4729 Throckmorton Plant Sciences Center  
 **Office hours**:	Tuesday 12:00-1pm  
 
