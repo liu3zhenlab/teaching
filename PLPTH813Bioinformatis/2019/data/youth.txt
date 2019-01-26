@@ -1,0 +1,55 @@
+# Cigarette Usage (Youth 2013)
+# Source: Behavioral Risk Factor Surveillance System
+# http://apps.nccd.cdc.gov/statesystem
+State	Youth Cigarette Use (%)
+Alabama	NA
+Alaska	10.6
+Arizona	14.1
+Arkansas	19.1
+California	NA
+Colorado	NA
+Connecticut	13.5
+Delaware	14.2
+District of Columbia	NA
+Florida	10.8
+Georgia	12.8
+Hawaii	10.4
+Idaho	12.2
+Illinois	14.1
+Indiana	NA
+Iowa	NA
+Kansas	10.2
+Kentucky	17.9
+Louisiana	12.1
+Maine	12.8
+Maryland	11.9
+Massachusetts	10.7
+Michigan	11.8
+Minnesota	NA
+Mississippi	17.2
+Missouri	14.9
+Montana	15.2
+Nebraska	10.9
+Nevada	10.3
+New Hampshire	13.8
+New Jersey	12.9
+New Mexico	14.4
+New York	10.6
+North Carolina	15
+North Dakota	19
+Ohio	15.1
+Oklahoma	18.5
+Oregon	NA
+Pennsylvania	NA
+Rhode Island	8
+South Carolina	16
+South Dakota	16.5
+Tennessee	15.4
+Texas	14.1
+Utah	4.4
+Vermont	NA
+Virginia	11.1
+Washington	NA
+West Virginia	19.6
+Wisconsin	11.8
+Wyoming	17.4
