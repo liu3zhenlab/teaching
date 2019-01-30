@@ -1,5 +1,5 @@
 ### Howework
-Homework assignments will be deposited.
+Homework assignments will be deposited here.
 
 **Notes**  
 After you finish your homework, please print it out and turn in the homework in chass.
