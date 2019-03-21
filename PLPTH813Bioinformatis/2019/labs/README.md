@@ -1,1 +1,1 @@
-Bioinformatics lab materials will be deposited here.
+Bioinformatics lab materials are posted here.
