@@ -1,5 +1,5 @@
 ### Howework
-Homework assignments will be deposited here.
+Homework assignments will be posted here.
 
 **Notes**  
 After you finish your homework, please print it out and turn in the homework in class.
