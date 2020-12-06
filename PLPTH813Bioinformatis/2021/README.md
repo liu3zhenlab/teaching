@@ -57,7 +57,7 @@ The midterm exam will cover Part 1 and 2. The final exam will cover all teaching
 
 Students are expected to start to design their projects after the midterm. The project can be related to students' own research projects or utilize public data for a meaningful analysis. Ideas will be proposed in a 10-minute presentation during the class. The presentation should include the goal, the rationale, the data source, and the expected result. In the last 2 weeks, students will present their projects. Eeach presentation will take ~15 minutes.  
 
-### *Ohter notes*
+### *Other notes*
 
 We will use the software R throughout the course. Students in the class are required to have the Beocat account that allows you to access the Beocat server and use R-studio through Beocat.
 
