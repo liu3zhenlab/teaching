@@ -31,14 +31,13 @@ PLPTH813 will cover the basic principle of regular bioinformatics applications a
 **PART 3**. Application of NGS in Genomics
 
 1.	Genomic variant discovery
-2.	Genotyping by sequencing
-3.	Phylogeny
-4.	Genetic mapping (QTL, bulked segregant analysis, genome-wide association)
-5.	Genome assembly (assembly tools and evaluation)
-6.	Comparative genomics
-7.	Metagenomics
-8.	RNA-Seq (technology, experimental design and differential expression)
-9.	Applications of machine learning in genomics
+2.	Phylogeny
+3.	Genetic mapping (QTL, bulked segregant analysis, genome-wide association)
+4.	Genome assembly (assembly tools and evaluation)
+5.	Comparative genomics
+6.	Metagenomics
+7.	RNA-Seq (technology, experimental design and differential expression)
+8.	Applications of machine learning in genomics
 
 **PART 4**. Student project presentations
 
