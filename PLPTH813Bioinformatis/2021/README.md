@@ -46,15 +46,15 @@ PLPTH813 will cover the basic principle of regular bioinformatics applications a
 
 Participation 10%, Homework 30%, Midterm Exam 20%, Student project 15%, final Exam 25%
 
-##### Paritcipation
+#### 1. Paritcipation
 
 Students are ancipated to be present in each Zoom session. Absence needs to be informed prior to the class. Without notisfications, the score for the participation will be compromised.  
 
-##### Midterm and final exam
+#### 2. Midterm and final exam
 
 The midterm exam will cover Part 1 and 2. The final exam will cover all teaching materials through the semester. Students are allowed to use books and laptops. Two hours will be given to students to return their answers. Communication is NOT allowed among students during the exam course.  
 
-##### Student project
+#### 3. Student project
 
 Students are expected to start to design their projects after the midterm. The project can be related to students' own research projects or utilize public data for a meaningful analysis. Ideas will be proposed in a 10-minute presentation during the class. The presentation should include the goal, the rationale, the data source, and the expected result. In the last 2 weeks, students will present their projects. Eeach presentation will take ~15 minutes.  
 
