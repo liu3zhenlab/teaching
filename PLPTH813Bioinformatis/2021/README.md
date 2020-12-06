@@ -57,22 +57,22 @@ The midterm exam will cover Part 1 and 2. The final exam will cover all teaching
 
 Students are expected to start to design their projects after the midterm. The project can be related to students' own research projects or utilize public data for a meaningful analysis. Ideas will be proposed in a 10-minute presentation during the class. The presentation should include the goal, the rationale, the data source, and the expected result. In the last 2 weeks, students will present their projects. Eeach presentation will take ~15 minutes.  
 
-#### *notes*
+### *Ohter notes*
 
 We will use the software R throughout the course. Students in the class are required to have the Beocat account that allows you to access the Beocat server and use R-studio through Beocat.
 
-#### Acknowledgements  
+### Acknowledgements  
 This development and improvement of this course was contributed by Hairong Wei, Ying Hu, Lei Li as well as students taking this course in the past.  
 
-#### Academic Honesty and Integrity Statement
+### Academic Honesty and Integrity Statement
 Kansas State University has an Honor & Integrity System based on personal integrity, which is presumed to be sufficient assurance in academic matters one’s work is performed honestly and without unauthorized assistance. Undergraduate and graduate students, by registration, acknowledge the jurisdiction of the Honor & Integrity System. The policies and procedures of the Honor System apply to all full and part-time students enrolled in undergraduate and graduate courses on-campus, off-campus, and via distance learning. A component vital to the Honor & Integrity System is the inclusion of the Honor Pledge which applies to all assignments, examinations, or other course work undertaken by students. The Honor Pledge is implied, whether or not it is stated: "On my honor, as a student, I have neither given nor received unauthorized aid on this academic work." The default in this class is that ALL work will be accomplished individually, UNLESS my permission is given in advance of an assignment/quiz/exam/take-home exam/final. A grade of XF can result from a breach of academic honesty. The F indicates failure in the course; the X indicates the reason is an Honor Pledge violation. For more information, visit the Honor & Integrity System home web page at: http://www.k-state.edu/honor/
 
-#### Statements for Academic Accommodations for Students with Disabilities
+### Statements for Academic Accommodations for Students with Disabilities
 Students with disabilities who need classroom accommodations, access to technology, or information about emergency building/campus evacuation processes should contact the Student Access Center and/or their instructor.  Services are available to students with a wide range of disabilities including, but not limited to, physical disabilities, medical conditions, learning disabilities, attention deficit disorder, depression, and anxiety.  If you are a student enrolled in campus/online courses through the Manhattan or Olathe campuses, contact the Student Access Center at accesscenter@k-state.edu, 785-532-6441; for Salina campus, contact the Academic and Career Advising Center at acac@k-state.edu or call 785-826-2649.
 
-#### Statement Defining Expectations for Classroom Conduct
+### Statement Defining Expectations for Classroom Conduct
 All student activities in the University, including this course, are governed by the Student Judicial Conduct Code as outlined in the Student Governing Association By Laws, Article VI, Section 3, number 2.  Students who engage in behavior that disrupts the learning environment may be asked to leave the class. 
 
-#### Statement for Copyright Notification
+### Statement for Copyright Notification
 Copyright 2020 Sanzhen Liu as to this syllabus and all lectures.  During this course students are prohibited from selling notes to or being paid for taking notes by any person or commercial firm without the express written permission of the professor teaching this course. 
 
