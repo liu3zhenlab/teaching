@@ -42,11 +42,11 @@ PLPTH813 will cover the basic principle of regular bioinformatics applications a
 
 **PART 4**. Student project presentations
 
-###Grading
+### Grading
 
 Participation 10%, Homework 30%, Midterm Exam 20%, Student project 15%, final Exam 25%
 
-#####Paritcipation
+Paritcipation
 
 Students are ancipated to be present in each Zoom session. Absence needs to be informed prior to the class. Without notisfications, the score for the participation will be compromised.  
 
