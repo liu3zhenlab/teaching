@@ -1,7 +1,5 @@
-### Bioinformatics Applications - PLPTH813
+## Bioinformatics Applications (PLPTH813)
 
-
-## PLPTH813 - Bioinformatics Applications
 **Semester**: Spring 2021  
 **Instructor**: Sanzhen Liu, Plant Pathology, Kansas State University  
 **Contact information**: liu3zhen@ksu.edu
