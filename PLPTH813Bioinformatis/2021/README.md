@@ -9,6 +9,8 @@
 **Office**:	https://ksu.zoom.us/j/8468443307 (appointment is required)  
 **Office hours**:	Tuesday 12:30-1:30pm  
 
+**Exam**: midterm on 3/18/2021 Thursday; final in the final week  
+
 ### Goal of the course
 
 PLPTH813 will cover the basic principle of regular bioinformatics applications and emphasize the practice of bioinformatics in biological research. The course will introduce some useful computation skills, such as Unix commands and R programming, in data analysis at the beginning of the semester, and then will apply these skills throughout the course. This course will be focused on the application of bioinformatics in next-generation sequencing (NGS) data analysis, including genetic mapping, genome assembly, variant discovery, genotyping, RNA-Seq, and so on. The ultimate goal of this course is to help students to be prepared for the next-generation biological research that often generates large data and requires computational skills in data management and data translation. 
