@@ -9,7 +9,7 @@
 **Office**:	https://ksu.zoom.us/j/8468443307 (appointment is required)  
 **Office hours**:	Tuesday 12:30-1:30pm  
 
-**Exam**: midterm on 3/11/2021 Thursday; final in the final week  
+**Exam**: midterm from 10am on 3/11/2021 Thursday; final in the final week  
 
 ### Goal of the course
 
@@ -57,7 +57,7 @@ The midterm exam will cover Part 1 and 2. The final exam will cover all teaching
 
 #### 3. Student project
 
-Students are expected to start to design their projects after the midterm. The project can be related to students' own research projects or utilize public data for a meaningful analysis. Ideas will be proposed in a 10-minute presentation during the class. The presentation should include the goal, the rationale, the data source, and the expected result. In the last 2 weeks, students will present their projects. Eeach presentation will take ~15 minutes.  
+Students are expected to start to design their projects after the midterm. The project can be related to students' own research projects or utilize public data for a meaningful analysis. Ideas will be proposed in a 5-minute presentation during the class. The presentation should include the goal, the rationale, the data source, and the expected result. In the last 1-2 weeks, students will present their projects. Eeach presentation will take ~15 minutes.  
 
 ### *Other notes*
 
