@@ -57,7 +57,7 @@ The midterm exam will cover Part 1 and 2. The final exam will cover all teaching
 
 #### 3. Student project
 
-Students are expected to start to design their projects after the midterm. The project can be related to students' own research projects or utilize public data for a meaningful analysis. Ideas will be proposed in a 5-minute presentation during the class. The presentation should include the goal, the rationale, the data source, and the expected result. In the last 1-2 weeks, students will present their projects. Eeach presentation will take ~15 minutes.  
+Students are expected to start to design their projects after the midterm. The project can be related to students' own research projects or utilize public data for a meaningful analysis. Ideas will be proposed in a 5-minute presentation during the class. The presentation should include the goal, the rationale, the data source, and the expected result. In the last 1-2 weeks, students will present their projects. Each presentation will take ~15 minutes.  
 
 ### *Other notes*
 
