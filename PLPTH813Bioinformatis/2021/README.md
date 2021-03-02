@@ -9,7 +9,7 @@
 **Office**:	https://ksu.zoom.us/j/8468443307 (appointment is required)  
 **Office hours**:	Tuesday 12:30-1:30pm  
 
-**Exam**: midterm from 10am on 3/11/2021 Thursday; final in the final week  
+**Exam**: midterm from 10:30am on 3/11/2021 Thursday; final in the final week  
 
 ### Goal of the course
 
