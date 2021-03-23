@@ -14,7 +14,7 @@ for qry in $indir/[MR]*fasta; do
 	out=`echo $qry | sed 's/.*\///'g | sed 's/.fasta//g'`
 	group="@RG\tID:${out}\tSM:${out}"
 	echo $group
-	perl /homes/liu3zhen/scripts/fasta/fa2fq.pl --fa ${qry} --qual 40 > ${out}.fastq
+	perl ../scripts/fa2fq.pl --fa ${qry} --qual 40 > ${out}.fastq
 	
 	bwa mem -R $group $ref ${out}.fastq > ${out}.sam
 	# bam and sort
