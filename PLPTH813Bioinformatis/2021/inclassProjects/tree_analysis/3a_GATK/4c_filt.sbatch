@@ -15,7 +15,7 @@ table=4o_gatk.filt.txt
 	-O $outvcf
 
 # convert to table format
-perl /homes/liu3zhen/scripts2/vcfbox/vcfbox.pl recode $outvcf > $table
+perl ../scripts/vcfbox.pl recode $outvcf > $table
 
 #/homes/liu3zhen/software/GATK/gatk4/gatk-4.1.9.0/gatk VariantsToTable \
 #	-R $ref \
