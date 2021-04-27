@@ -1,0 +1,39 @@
+mkdir training-feature-classifiers
+cd training-feature-classifiers
+
+wget \
+  -O "85_otus.fasta" \
+  "https://data.qiime2.org/2019.10/tutorials/training-feature-classifiers/85_otus.fasta"
+  
+wget \
+  -O "85_otu_taxonomy.txt" \
+  "https://data.qiime2.org/2019.10/tutorials/training-feature-classifiers/85_otu_taxonomy.txt"
+  
+wget \
+  -O "rep-seqs.qza" \
+  "https://data.qiime2.org/2019.10/tutorials/training-feature-classifiers/rep-seqs.qza"
+  
+qiime tools import \
+  --type 'FeatureData[Sequence]' \
+  --input-path 85_otus.fasta \
+  --output-path 85_otus.qza
+
+qiime tools import \
+  --type 'FeatureData[Taxonomy]' \
+  --input-format HeaderlessTSVTaxonomyFormat \
+  --input-path 85_otu_taxonomy.txt \
+  --output-path ref-taxonomy.qza
+  
+qiime feature-classifier extract-reads \
+  --i-sequences 85_otus.qza \
+  --p-f-primer GTGCCAGCMGCCGCGGTAA \
+  --p-r-primer GGACTACHVGGGTWTCTAAT \
+  --p-trunc-len 120 \
+  --p-min-length 100 \
+  --p-max-length 400 \
+  --o-reads ref-seqs.qza
+
+qiime feature-classifier fit-classifier-naive-bayes \
+  --i-reference-reads ref-seqs.qza \
+  --i-reference-taxonomy ref-taxonomy.qza \
+  --o-classifier classifier.qza
