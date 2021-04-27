@@ -11,7 +11,7 @@
 
 **Exam**: midterm from 10:30am on 3/11/2021 Thursday; final in the final week  
 
-###Acknowledgements
+### Acknowledgements
 
 The development and improvement of this course was contributed by Hairong Wei, Ying Hu, Lei Li, Sonny Lee, Cheng He as well as students taking this course in the past.  
 
