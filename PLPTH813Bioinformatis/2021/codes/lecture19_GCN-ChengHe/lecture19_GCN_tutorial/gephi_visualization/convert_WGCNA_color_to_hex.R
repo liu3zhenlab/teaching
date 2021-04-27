@@ -1,0 +1,8 @@
+#install.packages("gplots")
+library("gplots")
+x <- read.csv("DTA_1k_P12M10_Cyt-nodes_p0.2.csv")
+m <- table(x$module)
+color <- names(m)
+out <- cbind(color,col2hex(color),m)
+colnames(out) <- c("color","hex","kmer_num")
+write.table(out,file="DTA_W0.2_moulde_hex_col.txt",sep="\t",quote=FALSE,row.names = FALSE)
