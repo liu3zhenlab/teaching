@@ -1,4 +1,4 @@
-datasource <- "http://129.130.89.83/tmp/public/RNASeq/RNASeq2017/data/seqcost2015_4.csv"
+datasource <- "https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/data/seqcost2015_4.csv"
 ngs.cost <- read.csv(datasource)
 
 mb.cost <- gsub("\\$", "", as.character(ngs.cost$Cost.per.Mb))
