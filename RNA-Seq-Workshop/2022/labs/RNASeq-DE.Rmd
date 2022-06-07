@@ -1,0 +1,389 @@
+---
+class: inverse,center,middle
+title: "Lab: Differential Expression via RNA-Seq Analysis"
+subtitle: "Genomic Technologies Workshop 2022 (PLPTH885)"
+author: "Sanzhen Liu"
+date: "6/8/2022"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+### Outline
+- Differential expression test using DESeq2
+
+- Result visualization
+
+- GO enrichment test
+
+### Course webpage
+[RNA-seq DE analysis](https://github.com/liu3zhenlab/teaching/tree/master/RNA-Seq-Workshop/2022)
+```{r, error=FALSE, message=FALSE, echo=F}
+data_url="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/"
+library(knitr)
+```
+
+### Lab co-teacher
+Dr. Guifang Lin
+
+---
+### OnDemand at Beocat
+[ondemand](https://ondemand.beocat.ksu.edu/)
+
+login with eID
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Ondemand.png" width=750 height=75>
+</div>
+
+---
+### Select RStudio
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/app_menu.png" width=200 height=500>
+</div>
+
+---
+### Request resources
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Rstudio_demand.png" width=600 height=500>
+</div>
+
+---
+### Connect to RStudio
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Rstudio_job.png" width=750 height=250>
+</div>
+
+---
+### Rstudio interface
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Rstudio.png" width=650 height=500>
+</div>
+
+---
+### Package installation
+```{r, eval = T, error=FALSE, message=FALSE, warning=FALSE}
+if (!require("BiocManager", quietly=T))
+  install.packages("BiocManager")
+
+if (!require("DESeq2", quietly=T))
+  BiocManager::install("DESeq2") # DESeq2
+
+if (!require("goseq", quietly=T))
+  BiocManager::install("goseq") # GOSeq
+
+if (!require("GO.db", quietly=T))
+  BiocManager::install("GO.db", force=T) # GO.db
+```
+
+---
+### preload modules
+```{r, error=FALSE, message=FALSE}
+pls=paste0(data_url, "/utils/load.R")
+source(pls)
+```
+
+- panel.cor2
+- rnaseq.pca
+- normalization
+
+[codes](https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/utils/load.R)
+
+---
+### Read expression data (Read counts per gene)
+
+```{r, comment=""}
+rc <- paste0(data_url, "/data/rc.txt")
+grc <- read.delim(rc)
+nrow(grc)  # the number of rows/lines
+```
+```{r, comment="", message = F, error = F, echo=F}
+kable(head(grc, 1))  # show the first 1 rows
+kable(tail(grc, 1))  # show the last 1 rows
+```
+
+---
+### RPKM normalization
+```{r, comment="", results="hide", message = F, error = F}
+datacols <- c("ck_rep1", "ck_rep2", "ck_rep3",
+              "trt_rep1", "trt_rep2", "trt_rep3")
+lib.sizes <- colSums(grc[, datacols]) # library sizes
+exon.sizes <- grc$ExonSize
+grcn <- normalization(counts = grc,
+                      normcolname = datacols,
+                      libsize = lib.sizes,
+                      exonsize = exon.sizes,
+                      methods = "RPKM")
+```
+
+```{r, comment="", echo = F}
+kable(grcn[1:2, ])
+```
+
+---
+### data organization for DESeq2
+- count information
+```{r, comment=""}
+geneid <- grc$Gene
+in.data <- as.matrix(grc[, 3:8])
+```
+
+```{r, comment="", echo=F, message = F, error = F}
+kable(head(in.data, 1))
+```
+
+---
+### sample names and grouping information (treatment)
+```{r, comment=""}
+sample.ids <- colnames(in.data)
+treatment <- c("ck", "ck", "ck", "trt", "trt", "trt")
+sample.info <- data.frame(row.names=sample.ids, trt=treatment)
+```
+```{r, comment="", echo=F, message = F, error = F}
+kable(sample.info)
+```
+
+---
+### Differential expression test
+
+```{r, comment="", results="hide", message=F, warning=F}
+dds <- DESeqDataSetFromMatrix(countData=in.data,
+                              colData=sample.info,
+                              formula(~trt))
+dds <- DESeq(dds)
+```
+
+---
+### DE output
+```{r, comment=""}
+res <- results(object = dds)
+res <- data.frame(res)
+res$Gene <- geneid
+res <- res[,c("Gene","baseMean","log2FoldChange","pvalue","padj")]
+nrow(res)
+```
+
+---
+### DE + normalized data
+```{r, comment=""}
+### Merge the normalized result with the DE result
+out <- merge(grcn, res, by = "Gene")
+out <- data.frame(out)
+```
+
+```{r, echo=F, comment=""}
+kable(out[1:2, 1:7])
+kable(out[1:2, 8:12])
+kable(out[1:2, 13:ncol(out)])
+```
+
+---
+#### significant gene sets at different FDRs
+```{r, comment=""}
+sum(!is.na(out$padj) & out$padj < 0.05)
+```
+
+**problem**  
+Please revise the code to calculate the number of significant genes with the FDR smaller than 10% and 15%?
+
+---
+### significantly DEG
+```{r, comment=""}
+sig <- out[!is.na(out$padj) & out$padj < 0.05, ]
+```
+
+---
+### p-value histogram
+```{r, fig.height = 5, dev='png', fig.align='center'}
+pvals <- out$pvalue
+hist(pvals, main="Histogram",xlab="p-values",ylab="Number of genes")
+```
+
+**problem**  
+Please modify the plot code to change the figure title to "DE"
+
+---
+### scatter plot - raw counts
+```{r, fig.height = 5, dev='png', fig.align='center'}
+x.raw <- out$ck_rep1
+y.raw <- out$ck_rep2
+drange <- range(x.raw, y.raw, finite=T)
+# plot a scatter plot between two samples
+plot(x.raw, y.raw, main = "Raw counts",
+     xlab="control rep1", ylab="control rep2",
+     xlim = drange, ylim = drange)
+abline(a = 0, b = 1, col = "orange")
+```
+
+---
+### scatter plot - RPKM
+```{r, fig.height = 5, dev='png', fig.align='center'}
+x <- log(out$ck_rep1.RPKM)
+y <- log(out$ck_rep2.RPKM)
+drange <- range(x, y, finite=T)
+plot(x, y, main = "log of RPKM",
+     xlab = "control rep1", ylab = "control rep2",
+     xlim = drange, ylim = drange)
+abline(a = 0, b = 1, col = "orange")
+```
+
+---
+### pair-wise scatter plots
+```{r, fig.height = 6, dev='png', fig.align='center'}
+logrpkm <- log(out[, 9:14])
+pairs(logrpkm, lower.panel=panel.smooth, upper.panel=panel.cor2)
+```
+
+---
+### Principal Component Analysis (PCA)
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/pca.slide.png" width=750 height=400>
+</div>
+
+---
+### function / module
+You can write your own function:  
+fun_name <- function (…) {
+  ...
+}
+```{r, comment=""}
+gpa_improve <- function(gpa, rate) {
+### gpa: a numeric vector for GPAs
+### rate: percentage for the improvement
+	new.gpa <- gpa * (1 + rate)
+	new.gpa[new.gpa > 4] <- 4	
+	return(new.gpa)
+}
+
+### running the function
+our.gpa <- c(3.8, 3.3, 2.8, 3.1)
+gpa_improve(our.gpa, 0.1)
+gpa_improve(our.gpa, 0.2)
+```
+
+---
+### PCA function
+
+**principal component analysis and ploting**
+```{r, eval = F}
+rnaseq.pca <- function(norm.data,  
+  norm.feature="RPKM",  
+	group.feature,  
+	title="",  
+  shape.code=NULL,  
+	mean.cutoff=0.1,  
+	colors=NULL,
+	scaling=T, ...) {  
+	…  
+}
+```
+
+---
+### PCA plotting
+```{r, fig.height = 5.5, dev='png', fig.align='center'}
+rnaseq.pca(out, norm.feature="RPKM", group.feature=c("ck", "trt"),
+           cex=3, shape.code=c(5, 16), mean.cutoff=0.1, scaling = T,
+           title="PCA-all genes", colors=c("dark green","orange"))
+```
+
+---
+### MA plot
+```{r, fig.height = 4.5, dev='png', fig.align='center'}
+aval <- log(out$baseMean)
+mval <- out$log2FoldChange
+sig.set <- which(out$padj < 0.05)
+plot(aval, mval, main="MA plot",
+     xlab="log(mean of exp)", ylab="log2FC",
+     ylim=c(-4, 6), pch=19, cex=0.3, col="blue")
+# add points and a horizontal line
+points(aval[sig.set], mval[sig.set], pch=19,cex=0.3,col="red")
+abline(h = 0, cex = 1, col = "dark green")
+```
+
+---
+### Volcano plot
+```{r, fig.height = 4, dev='png', fig.align='center'}
+log2val <- out$log2FoldChange  # log2 fold change
+mlogP <- -log10(out$pvalue) # transformed p-values
+### plot
+plot(log2val, mlogP, main="Volcano plot",
+     xlab="log2FC", ylab="-log10(p-value)",
+     pch=19, cex=0.4,col="grey", xlim=c(-6,6), ylim=c(0,16))
+### highlight
+up <- which(out$padj<0.05 & log2val > 0) # up
+down <- which(out$padj<0.05 & log2val < 0)  # down
+points(log2val[up], mlogP[up], pch=19,cex=0.4,col="brown")
+points(log2val[down], mlogP[down],pch=19,cex=0.4,col="blue")
+```
+
+---
+### Gene ontology (GO) enrichment analysis
+- a gene and GO association table
+
+- a list of all genes
+
+- a list of significant genes
+
+- mean or total gene read counts per gene (**optional**)
+
+---
+### GOSeq (I)
+```{r, fig.height = 4.5, dev='png', fig.align='center', message=F, warning=F}
+gdbf=paste0(data_url, "/data/go.txt")
+godb <- read.delim(gdbf)
+geneid <- as.character(out$Gene)  # gene vector
+# a vector to indicate if the gene is DE (0 or 1)
+de.vector <- as.integer(!is.na(out$padj) & out$padj < 0.05)
+names(de.vector) <- geneid
+countbias <- out$baseMean # total raw reads per gene
+# bias fitting
+pwf.counts <- nullp(DEgenes=de.vector, bias.data=countbias)
+```
+
+---
+### GOSeq (II)
+```{r, fig.height = 4.5, dev='png', fig.align='center', message=F, comment="", results="hide", error=F}
+go <- goseq(pwf=pwf.counts, gene2cat=godb, method="Sampling",
+            repcnt=1000, use_genes_without_cat=F)  # GO enrichment
+```
+
+```{r, echo=F, comment=""}
+kable(t(head(go, 1)))
+```
+
+```{r, comment=""}
+example.go <- GOTERM[["GO:0004175"]]  # GO information
+Definition(example.go)  # return GO definition
+```
+
+---
+## Summary of the analyzing procedure
+
+1. Read counts per gene
+
+2. DE analysis based on the experimental design
+
+3. Examine results (p-value distribution, number of significant genes)
+
+4. Gene Ontology enrichment test
+
+[DESeq2 tutorial](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
+
+---
+### Contact information
+Sanzhen Liu  
+Plant Pathology  
+4729 Throckmorton Plant Sciences Center  
+Manhattan, KS 66506-5502  
+phone: 785-532-1379  
+
+[liu3zhen@ksu.edu](liu3zhen@ksu.edu)  
+twitter: [liu3zhen](https://twitter.com/liu3zhen?lang=en)
+
+### Bioinformatics Applications
+PLPTH813, Spring 2022
