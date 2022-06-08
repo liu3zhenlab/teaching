@@ -5,6 +5,7 @@ data_url="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-
 
 # install packages
 if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+install.packages("matrixStats", repos="http://cran.us.r-project.org")
 if (!require("DESeq2", quietly = TRUE)) BiocManager::install("DESeq2") # DESeq2
 if (!require("goseq", quietly = TRUE)) BiocManager::install("goseq") # GOSeq
 if (!require("GO.db", quietly = TRUE)) BiocManager::install("GO.db", force=T) # GO.db

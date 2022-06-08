@@ -22,8 +22,8 @@ output:
 
 ### Course webpage
 [RNA-seq DE analysis](https://github.com/liu3zhenlab/teaching/tree/master/RNA-Seq-Workshop/2022)
+
 ```{r, error=FALSE, message=FALSE, echo=F}
-data_url="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/"
 library(knitr)
 ```
 
@@ -71,6 +71,11 @@ login with eID
 if (!require("BiocManager", quietly=T))
   install.packages("BiocManager")
 
+# to solve a version issue, install matrixStats to update the version
+# suggested by Adam Tygart from Beocat
+
+install.packages("matrixStats", repos="http://cran.us.r-project.org")
+
 if (!require("DESeq2", quietly=T))
   BiocManager::install("DESeq2") # DESeq2
 
@@ -84,7 +89,8 @@ if (!require("GO.db", quietly=T))
 ---
 ### preload modules
 ```{r, error=FALSE, message=FALSE}
-pls=paste0(data_url, "/utils/load.R")
+data_url <- "https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/"
+pls <- paste0(data_url, "/utils/load.R")
 source(pls)
 ```
 
@@ -102,9 +108,15 @@ rc <- paste0(data_url, "/data/rc.txt")
 grc <- read.delim(rc)
 nrow(grc)  # the number of rows/lines
 ```
+
+first entry:
 ```{r, comment="", message = F, error = F, echo=F}
-kable(head(grc, 1))  # show the first 1 rows
-kable(tail(grc, 1))  # show the last 1 rows
+kable(head(grc, 1))  # show the first row
+```
+
+last entry:
+```{r, comment="", message = F, error = F, echo=F}
+kable(tail(grc, 1))  # show the last row
 ```
 
 ---
