@@ -1,0 +1,7 @@
+Order	ID	Genotype	Sample	Treatment	Citation
+1	SRR1238718	B73	norm1	norm	Hirsch2015TPJ
+2	SRR1819617	B73	norm2	norm	Hirsch2015TPJ
+3	SRR1819621	B73	norm3	norm	Hirsch2015TPJ
+4	SRR1238717	B73	cold1	cold	Hirsch2015TPJ
+5	SRR1819204	B73	cold2	cold	Hirsch2015TPJ
+6	SRR1819205	B73	cold3	cold	Hirsch2015TPJ
