@@ -33,32 +33,32 @@ library(knitr)
 login with eID
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Ondemand.png" width=750 height=75>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Ondemand.png" width=750 height=75>
 </div>
 
 ---
 ### Select RStudio
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/app_menu.png" width=200 height=500>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/app_menu.png" width=200 height=500>
 </div>
 
 ---
 ### Request resources
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Rstudio_demand.png" width=600 height=500>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio_ondemand.png" width=600 height=500>
 </div>
 
 ---
 ### Connect to RStudio
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Rstudio_job.png" width=750 height=250>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio_job.png" width=750 height=250>
 </div>
 
 ---
 ### Rstudio interface
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Rstudio.png" width=650 height=500>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio.png" width=650 height=500>
 </div>
 
 ---
@@ -95,8 +95,8 @@ source(pls)
 ### Read expression data (Read counts per gene)
 
 ```{r, comment=""}
-rc <- paste0(data_url, "/data/rc.txt")
-grc <- read.delim(rc)
+rc_file <- paste0(data_url, "/data/rc.txt")
+grc <- read.delim(rc_file)
 nrow(grc)  # the number of rows/lines
 ```
 

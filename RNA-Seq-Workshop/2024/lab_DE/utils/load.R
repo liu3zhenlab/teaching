@@ -17,7 +17,7 @@ for (i in 1:nullnum) {
 ### a module to be used in the "pairs" function to plot pair-wise scatter plots
 ###
 panel.cor2 <- function(x, y, digits = 2, prefix = "", cex.cor, ...) {
-  usr <- par("usr"); on.exit(par(usr))
+  #usr <- par("usr"); on.exit(par(usr))
   x[is.infinite(x)] <- NA
   y[is.infinite(y)] <- NA
   par(usr = c(0, 1, 0, 1))
