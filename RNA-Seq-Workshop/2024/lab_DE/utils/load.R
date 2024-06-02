@@ -17,11 +17,11 @@ for (i in 1:nullnum) {
 ### a module to be used in the "pairs" function to plot pair-wise scatter plots
 ###
 panel.cor2 <- function(x, y, digits = 2, prefix = "", cex.cor, ...) {
-  #usr <- par("usr"); on.exit(par(usr))
+  par(usr = c(0, 1, 0, 1))
   x[is.infinite(x)] <- NA
   y[is.infinite(y)] <- NA
-  par(mar=c(0, 1, 0, 1))
-  r <- abs(cor(x, y, use = "complete.obs"))
+  #r <- abs(cor(x, y, use = "complete.obs"))
+  r <- abs(cor(x, y))
   txt <- format(c(r, 0.123456789), digits = digits)[1]
   txt <- paste0(prefix, txt)
   if(missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
