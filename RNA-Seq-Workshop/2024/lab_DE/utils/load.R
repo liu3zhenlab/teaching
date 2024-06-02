@@ -20,7 +20,7 @@ panel.cor2 <- function(x, y, digits = 2, prefix = "", cex.cor, ...) {
   #usr <- par("usr"); on.exit(par(usr))
   x[is.infinite(x)] <- NA
   y[is.infinite(y)] <- NA
-  par(usr = c(0, 1, 0, 1))
+  par(mar=c(0, 1, 0, 1))
   r <- abs(cor(x, y, use = "complete.obs"))
   txt <- format(c(r, 0.123456789), digits = digits)[1]
   txt <- paste0(prefix, txt)
