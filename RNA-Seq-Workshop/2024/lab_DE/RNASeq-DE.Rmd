@@ -80,7 +80,7 @@ if (!require("DESeq2", quietly=T))
 ---
 ### preload modules
 ```{r, error=FALSE, message=FALSE}
-data_url <- "https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/lab_DE/"
+data_url <- "https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/lab_DE"
 pls <- paste0(data_url, "/utils/load.R")
 source(pls)
 ```
