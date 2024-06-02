@@ -1,14 +1,12 @@
 # DESeq2 R analysis
 
 # data link
-data_url="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/"
+data_url <- "https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/lab_DE"
 
 # install packages
 if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
 install.packages("matrixStats", repos="http://cran.us.r-project.org")
 if (!require("DESeq2", quietly = TRUE)) BiocManager::install("DESeq2") # DESeq2
-if (!require("goseq", quietly = TRUE)) BiocManager::install("goseq") # GOSeq
-if (!require("GO.db", quietly = TRUE)) BiocManager::install("GO.db", force=T) # GO.db
 
 # preload modules
 # panel.cor2; rnaseq.pca; normalization modules
@@ -16,8 +14,8 @@ pls=paste0(data_url, "/utils/load.R")
 source(pls)
 
 # load count data
-rc <- paste0(data_url, "/data/rc.txt")
-grc <- read.delim(rc)
+rc_file <- paste0(data_url, "/data/rc.txt")
+grc <- read.delim(rc_file)
 nrow(grc)  # the number of rows/lines
 head(grc, 1)
 
@@ -117,20 +115,3 @@ down <- which(out$padj<0.05 & log2val < 0)  # down
 points(log2val[up], mlogP[up], pch=19,cex=0.4,col="brown")
 points(log2val[down], mlogP[down],pch=19,cex=0.4,col="blue")
 
-# GOSeq
-gdbf=paste0(data_url, "/data/go.txt")
-godb <- read.delim(gdbf)
-geneid <- as.character(out$Gene)  # gene vector
-# a vector to indicate if the gene is DE (0 or 1)
-de.vector <- as.integer(!is.na(out$padj) & out$padj < 0.05)
-names(de.vector) <- geneid
-countbias <- out$baseMean # total raw reads per gene
-# bias fitting
-pwf.counts <- nullp(DEgenes=de.vector, bias.data=countbias)
-
-go <- goseq(pwf=pwf.counts, gene2cat=godb, method="Sampling",
-            repcnt = 1000, use_genes_without_cat = F)  # GO enrichment
-
-# check the description of a GO
-example.go <- GOTERM[["GO:0004175"]]  # GO information
-Definition(example.go)  # return GO definition

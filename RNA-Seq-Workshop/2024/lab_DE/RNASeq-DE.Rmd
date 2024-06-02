@@ -314,9 +314,8 @@ abline(h = 0, cex = 1, col = "dark green")
 log2val <- out$log2FoldChange  # log2 fold change
 mlogP <- -log10(out$pvalue) # transformed p-values
 ### plot
-plot(log2val, mlogP, main="Volcano plot",
-     xlab="log2FC", ylab="-log10(p-value)",
-     pch=19, cex=0.4,col="grey", xlim=c(-6,6), ylim=c(0,16))
+plot(log2val, mlogP, main="Volcano plot", xlab="log2FC", ylab="-log10(p)",
+     pch=19, cex=0.4, col="grey", xlim=c(-6,6), ylim=c(0,16))
 ### highlight
 up <- which(out$padj<0.05 & log2val > 0) # up
 down <- which(out$padj<0.05 & log2val < 0)  # down

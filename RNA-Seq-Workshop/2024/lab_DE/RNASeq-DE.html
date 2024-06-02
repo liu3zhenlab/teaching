@@ -311,24 +311,6 @@ logrpkm &lt;- log(out[, 9:14])
 pairs(logrpkm, lower.panel=panel.smooth, upper.panel=panel.cor2)
 ```
 
-```
-## Warning in par(usr): argument 1 does not name a graphical parameter
-## Warning in par(usr): argument 1 does not name a graphical parameter
-## Warning in par(usr): argument 1 does not name a graphical parameter
-## Warning in par(usr): argument 1 does not name a graphical parameter
-## Warning in par(usr): argument 1 does not name a graphical parameter
-## Warning in par(usr): argument 1 does not name a graphical parameter
-## Warning in par(usr): argument 1 does not name a graphical parameter
-## Warning in par(usr): argument 1 does not name a graphical parameter
-## Warning in par(usr): argument 1 does not name a graphical parameter
-## Warning in par(usr): argument 1 does not name a graphical parameter
-## Warning in par(usr): argument 1 does not name a graphical parameter
-## Warning in par(usr): argument 1 does not name a graphical parameter
-## Warning in par(usr): argument 1 does not name a graphical parameter
-## Warning in par(usr): argument 1 does not name a graphical parameter
-## Warning in par(usr): argument 1 does not name a graphical parameter
-```
-
 &lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
@@ -423,9 +405,8 @@ abline(h = 0, cex = 1, col = "dark green")
 log2val &lt;- out$log2FoldChange  # log2 fold change
 mlogP &lt;- -log10(out$pvalue) # transformed p-values
 ### plot
-plot(log2val, mlogP, main="Volcano plot",
-     xlab="log2FC", ylab="-log10(p-value)",
-     pch=19, cex=0.4,col="grey", xlim=c(-6,6), ylim=c(0,16))
+plot(log2val, mlogP, main="Volcano plot", xlab="log2FC", ylab="-log10(p)",
+     pch=19, cex=0.4, col="grey", xlim=c(-6,6), ylim=c(0,16))
 ### highlight
 up &lt;- which(out$padj&lt;0.05 &amp; log2val &gt; 0) # up
 down &lt;- which(out$padj&lt;0.05 &amp; log2val &lt; 0)  # down
