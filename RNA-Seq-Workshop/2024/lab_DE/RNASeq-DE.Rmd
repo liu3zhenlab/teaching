@@ -33,25 +33,25 @@ library(knitr)
 login with eID
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Ondemand.png" width=750 height=75>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Ondemand.png" width=750 height=75>
 </div>
 
 ---
 ### Select RStudio
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/app_menu.png" width=200 height=500>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/app_menu.png" width=200 height=500>
 </div>
 
 ---
 ### Request resources
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio_demand.png" width=600 height=500>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Rstudio_demand.png" width=600 height=500>
 </div>
 
 ---
 ### Connect to RStudio
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio_job.png" width=750 height=250>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Rstudio_job.png" width=750 height=250>
 </div>
 
 ---
@@ -89,7 +89,7 @@ source(pls)
 - rnaseq.pca
 - normalization
 
-[codes](https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/utils/load.R)
+[codes](https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/lab_DE/utils/load.R)
 
 ---
 ### Read expression data (Read counts per gene)
