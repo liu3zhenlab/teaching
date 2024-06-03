@@ -32,7 +32,7 @@ output:
 ### Why R?
 - R is great at statistical computing and graphics
 - R is a free software
-- R has great community supports ([CRAN repository](https://cran.r-project.org/web/packages/), Bioconductor, R-Forge, Github)
+- R has great community supports ([CRAN repository](https://cran.r-project.org/web/packages/), Bioconductor, GitHub)
 
 [r-project.org](https://www.r-project.org/about.html)
 

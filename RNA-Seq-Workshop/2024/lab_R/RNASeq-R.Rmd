@@ -32,7 +32,7 @@ output:
 ### Why R?
 - R is great at statistical computing and graphics
 - R is a free software
-- R has great community supports ([CRAN repository](https://cran.r-project.org/web/packages/), Bioconductor, R-Forge, Github)
+- R has great community supports ([CRAN repository](https://cran.r-project.org/web/packages/), Bioconductor, GitHub)
 
 [r-project.org](https://www.r-project.org/about.html)
 
@@ -83,7 +83,7 @@ source(cs)
 https://www.rstudio.com/products/rstudio/
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/install_rstudio_add.png" width=500 height=500>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/install_rstudio_add.png" width=600 height=250>
 </div>
 
 ---
@@ -404,14 +404,6 @@ Usage of commands
 Learning R at [swirlstats](http://swirlstats.com)
 
 [education.rstudio.com](https://education.rstudio.com)
-
-
----
-### Adventure with R
-<div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Radventure.png" width=800 height=500>
-</div>
-http://www.nature.com/news/programming-tools-adventures-with-r-1.16609
 
 
 ```{r, echo=FALSE}

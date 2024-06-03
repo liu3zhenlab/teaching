@@ -345,7 +345,7 @@ Manhattan, KS 66506-5502
 phone: 785-532-1379  
 
 [liu3zhen@ksu.edu](liu3zhen@ksu.edu)  
-twitter: [liu3zhen](https://twitter.com/liu3zhen?lang=en)
+twitter (X): [liu3zhen](https://twitter.com/liu3zhen?lang=en)
 
 ### Bioinformatics Applications
 PLPTH813, Spring 2025

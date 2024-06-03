@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Lab: Learning R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Guifang Lin/Sanzhen Liu" />
+    <script src="libs/header-attrs-2.27/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Lab: Learning R
+]
+.subtitle[
+## Genomic Technologies Workshop 2022 (PLPTH885)
+]
+.author[
+### Guifang Lin/Sanzhen Liu
+]
+.date[
+### 6/8/2022
+]
+
+---
+
+### Outlines
+- Introduction of R programming
+
+- Introduction of RStudio's IDE
+
+- Running basic R
+
+  + Data structure (vector and data frame)
+
+  + Data importing and exporting
+
+  + Plotting
+
+  + String operations
+
+---
+### Why R?
+- R is great at statistical computing and graphics
+- R is a free software
+- R has great community supports ([CRAN repository](https://cran.r-project.org/web/packages/), Bioconductor, GitHub)
+
+[r-project.org](https://www.r-project.org/about.html)
+
+***
+&lt;div align="center"&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Rpopularity.png" width=300 height=400&gt;
+&lt;/div&gt;
+
+
+
+---
+### R example 1 (R for statistics)
+
+Chi-square test
+
+``` r
+d &lt;- c(12, 36, 24, 70)
+dm &lt;- matrix(d, nrow=2, byrow=T)
+dm
+```
+
+```
+     [,1] [,2]
+[1,]   12   36
+[2,]   24   70
+```
+
+``` r
+chisq.test(dm)
+```
+
+```
+
+	Pearson's Chi-squared test with Yates' continuity correction
+
+data:  dm
+X-squared = 7.8894e-31, df = 1, p-value = 1
+```
+
+
+---
+### R example 2 (R for graphs)
+
+``` r
+ts="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/utils/xcard.R"
+source(ts)
+```
+
+---
+### R example 3 (R for graphs)
+
+``` r
+cs="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2022/utils//trend.R"
+source(cs)
+```
+
+&lt;img src="RNASeq-R_files/figure-html/cost-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+### How to run R?
+**Rstudio** is an open source integrated development environment (IDE) for R.
+
+https://www.rstudio.com/products/rstudio/
+
+&lt;div align="center"&gt;
+&lt;img src="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2022/images/install_rstudio_add.png" width=500 height=500&gt;
+&lt;/div&gt;
+
+---
+### Install RStudio
+* On your own machine (Rstudio Desktop)
+
+  + Download and install [R](https://cloud.r-project.org/)
+  
+  + Download and install [Rstudio](https://www.rstudio.com/products/RStudio/)
+
+---
+### RStudio Interface
+[RStudio IDE cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
+&lt;div align="center"&gt;
+&lt;img src="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2022/images/Rstudio_v4.2.0_add.png" width=400 height=400&gt;
+&lt;/div&gt;
+- Executing commands for the code editor
+  + PC window: control + return (enter)
+  + Apple MAC: command + return (enter)
+
+---
+### Setup working directory
+Working directory is the defult folder for input and output data.
+
+
+``` r
+dir.create("~/learnR") # create a directory for this practice.
+setwd("~/learnR") # setup working directory.
+```
+---
+### Install package
+
+[R packages](https://r-pkgs.org/intro.html) contains many functions developed R community.
+
+
+``` r
+install.packages("learnr")
+library("learnr")
+```
+
+---
+### Getting started, R commands
+**Expression**: evaluated, printed, and the value lost
+
+``` r
+2 + 4
+```
+
+```
+[1] 6
+```
+
+``` r
+68 * 0.15
+```
+
+```
+[1] 10.2
+```
+---
+### Assignment
+assign values to a variable  
+the value passed to a variable but NOT printed
+
+_assignment operator_: **&lt;-** or **=**
+
+
+``` r
+y &lt;- 2 
+y = 2 
+y
+```
+
+```
+[1] 2
+```
+
+``` r
+info &lt;- "hello world"
+cat(info)
+```
+
+```
+hello world
+```
+
+---
+### Notes
+- Comments (#):
+Notes to scripts, starting with a hashtag (‘#’), everything to the end of the line is a comment.  
+
+``` r
+y &lt;- 2 + 4  # an example of the assignment
+```
+
+- Variable names are case senstive
+
+``` r
+y &lt;- 2
+Y &lt;- 3
+y
+```
+
+```
+[1] 2
+```
+
+``` r
+Y
+```
+
+```
+[1] 3
+```
+
+---
+### vector: multiple elements
+A vector is a single entity consisting of an ordered collection of numbers, characters, logical quantities, etc.
+
+concatenate command: **c()**
+
+- Numeric vector  
+  c(10.4, 5.6, 3.1, 6.4, 21.7)
+  
+
+---
+### vector manipulation (I)
+
+``` r
+# Numeric vector
+x &lt;- c(10.4, 5.6, 3.1, 6.4, 21.7)
+sum(x)
+```
+
+```
+[1] 47.2
+```
+
+``` r
+2*x
+```
+
+```
+[1] 20.8 11.2  6.2 12.8 43.4
+```
+
+``` r
+### extract 2nd elements
+x[2]
+```
+
+```
+[1] 5.6
+```
+---
+### vector manipulation (II)
+# Logical vector
+
+``` r
+lv &lt;- c(TRUE, FALSE, TRUE, TRUE)
+!lv
+```
+
+```
+## [1] FALSE  TRUE FALSE FALSE
+```
+
+``` r
+lv == FALSE
+```
+
+```
+## [1] FALSE  TRUE FALSE FALSE
+```
+---
+### vector manipulation (III)
+
+``` r
+# Character vector
+cv &lt;- c("a", "b", "c")
+cv2 &lt;- paste(cv, 1:3, sep="")
+cv2
+```
+
+```
+[1] "a1" "b2" "c3"
+```
+
+``` r
+# Missing value  (NA, not available) 
+mvv &lt;- c("a", "b", "c", NA)
+is.na(mvv)
+```
+
+```
+[1] FALSE FALSE FALSE  TRUE
+```
+
+---
+### vector manipulation (IV)
+Vectors must have their values with the same mode, either numeric, character, logical, or other types.
+**conversion to other modes**
+
+``` r
+z &lt;- 0:9
+is.numeric(z)
+```
+
+```
+[1] TRUE
+```
+
+``` r
+z
+```
+
+```
+ [1] 0 1 2 3 4 5 6 7 8 9
+```
+
+``` r
+digits &lt;- as.character(z) # convert to character
+digits
+```
+
+```
+ [1] "0" "1" "2" "3" "4" "5" "6" "7" "8" "9"
+```
+
+``` r
+d &lt;- as.numeric(digits) # convert to numeric
+d
+```
+
+```
+ [1] 0 1 2 3 4 5 6 7 8 9
+```
+
+---
+### vector manipulation (V)
+- Select a subset of a vector
+
+``` r
+x &lt;- c(4, 5, 7, 3, 9)
+x[c(2, 3)]
+```
+
+```
+[1] 5 7
+```
+
+``` r
+x[x&gt;6]
+```
+
+```
+[1] 7 9
+```
+
+``` r
+x[-c(1, 5)]
+```
+
+```
+[1] 5 7 3
+```
+- Modify a vector
+
+``` r
+x[3] &lt;- 23.1
+c(x, 10.9)
+```
+
+```
+[1]  4.0  5.0 23.1  3.0  9.0 10.9
+```
+
+``` r
+x[-2]
+```
+
+```
+[1]  4.0 23.1  3.0  9.0
+```
+
+``` r
+length(x) &lt;- 2  # retain just the first 2 values
+x
+```
+
+```
+[1] 4 5
+```
+---
+### Question
+Can a vector contain different types of elements?
+
+
+``` r
+c(1, "a")
+c(1, TRUE)
+c(TRUE, "a")
+c(1, "a", TRUE)
+```
+
+---
+### Data frame
+A data frame may be regarded as a matrix (table) with columns possibly of differing modes
+
+- Making data frames
+
+``` r
+df &lt;- data.frame(name=c("Josh", "rose"), age=c(23, 35))
+df
+```
+
+```
+  name age
+1 Josh  23
+2 rose  35
+```
+
+---
+### Working with a data frame
+
+``` r
+df
+```
+
+```
+  name age
+1 Josh  23
+2 rose  35
+```
+
+Trying these commands:
+
+``` r
+head(df, 1)
+tail(df, 1)
+str(df)
+df[2, 1]
+df[2, 2]
+df[2]
+df[, 2]
+```
+
+---
+### Importing data
+**read.table()**: to read a data frame (table)  
+**read.delim**, **read.csv**
+
+
+``` r
+cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/data/cs.txt"
+d &lt;- read.delim(cpm)
+head(d, 3)
+```
+
+```
+    Date Cost.per.Mb Cost.per.Genome
+1 Sep-01     5292.39        95263072
+2 Mar-02     3898.64        70175437
+3 Sep-02     3413.80        61448422
+```
+&lt;div align="center"&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/cost.png" width=250 height=150&gt;
+&lt;/div&gt;
+cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/data/cs.txt"
+---
+### Exporting data
+**write.table()** or **write.csv()**
+
+To write a tab-delimited file
+
+``` r
+x &lt;- data.frame(a = "pi", b = pi)
+write.table(x, file="foo.txt", sep="\t", row.names=FALSE)
+```
+
+- file="foo.txt": foo.txt is the ouput file name
+- sep="\t": separated by a tab (\t)
+- row.names=FALSE: row names are not included in the output
+
+---
+### Practice by your own
+- Create a data frame  
+
+  three columns: 1. Name 2. Major 3. Gender  
+  three rows (entries): your neighbors and you
+
+- Write the data frame to an output file
+
+- Read the file to R and add one more column
+(e.g., favorite color)
+
+---
+### Plotting: plot()
+High-level plot: create a new plot
+
+plot(x, y, xlab, ylab, main, …)
+
+&lt;div align="center"&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/plot.png" width=500 height=450&gt;
+&lt;/div&gt;
+
+---
+### Adding contents to a plot
+Low-level plot: add to an existing plot
+- add points  
+**points()**
+
+- add lines  
+**lines()**
+
+- add text or legend  
+**text()**  
+**legend()**
+
+---
+### Scatter plot
+
+``` r
+area &lt;- state.x77[, "Area"]
+pop &lt;- state.x77[, "Population"]
+# scatter plot
+plot(area, pop, main="US1977")
+# label points
+points(area["Kansas"], pop["Kansas"], col="purple",
+       lwd=2, pch=19, cex=2)
+```
+
+&lt;img src="RNASeq-R_files/figure-html/scatter-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+### Boxplot
+
+``` r
+barplot(pop/1000, las=2, cex.names=0.65, ylab="Pop (x1000,000)",
+        main="US 1977 Population")
+```
+
+&lt;img src="RNASeq-R_files/figure-html/boxplot-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+### Histogram
+
+``` r
+hist(pop, ylab="Number of states", main="US 1977 Population")
+```
+
+&lt;img src="RNASeq-R_files/figure-html/histogram-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+### String operations - nchar
+**nchar()**
+nchar the sizes of the corresponding elements of a vector.
+
+
+``` r
+cvec &lt;- c("google", "hello", "the", "world")
+nchar(cvec)
+```
+
+```
+[1] 6 5 3 5
+```
+
+---
+### String operations - grep
+**grep()**
+grep searches for matches to argument pattern within each element of a character vector
+
+
+``` r
+cvec
+```
+
+```
+[1] "google" "hello"  "the"    "world" 
+```
+
+``` r
+grep("o", cvec)
+```
+
+```
+[1] 1 2 4
+```
+---
+### String operations – sub and gsub
+**sub()** and **gsub()**
+sub and gsub perform replacement of the first and all matches respectively.
+
+
+``` r
+cvec
+```
+
+```
+[1] "google" "hello"  "the"    "world" 
+```
+
+``` r
+sub("o", "O", cvec)
+```
+
+```
+[1] "gOogle" "hellO"  "the"    "wOrld" 
+```
+
+``` r
+gsub("o", "O", cvec)
+```
+
+```
+[1] "gOOgle" "hellO"  "the"    "wOrld" 
+```
+
+---
+### Getting help
+Usage of commands
+- help(nchar)
+- ?nchar
+- ??colsum
+
+[R Reference Card](https://cran.r-project.org/doc/contrib/Short-refcard.pdf)
+
+- [stack overflow](https://stackoverflow.com/)
+- [google](https://google.com)
+
+Learning R at [swirlstats](http://swirlstats.com)
+
+[education.rstudio.com](https://education.rstudio.com)
+
+
+---
+### Adventure with R
+&lt;div align="center"&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Radventure.png" width=800 height=500&gt;
+&lt;/div&gt;
+http://www.nature.com/news/programming-tools-adventures-with-r-1.16609
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
