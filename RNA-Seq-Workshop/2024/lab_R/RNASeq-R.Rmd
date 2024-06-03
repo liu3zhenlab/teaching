@@ -41,7 +41,11 @@ output:
 <img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Rpopularity.png" width=300 height=400>
 </div>
 
-
+---
+### Slides and codes
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/DEsite.jpg" width=300 height=400>
+</div>
 
 ---
 ### R example 1 (R for statistics)
@@ -61,14 +65,14 @@ chisq.test(dm)
 ---
 ### R example 2 (R for graphs)
 ```{r xcard, echo=T, eval=F, fig.height = 5, results='hide', dev='png', fig.align='center'}
-ts="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/utils/xcard.R"
+ts="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/lab_DE/utils/xcard.R"
 source(ts)
 ```
 
 ---
 ### R example 3 (R for graphs)
 ```{r cost, echo=T, fig.height = 6.5, fig.width = 10, results='hide', dev='png', fig.align='center'}
-cs="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2022/utils//trend.R"
+cs="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/lab_DE/utils/trend.R"
 source(cs)
 ```
 
@@ -79,7 +83,7 @@ source(cs)
 https://www.rstudio.com/products/rstudio/
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2022/images/install_rstudio_add.png" width=500 height=500>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/install_rstudio_add.png" width=500 height=500>
 </div>
 
 ---
@@ -94,7 +98,7 @@ https://www.rstudio.com/products/rstudio/
 ### RStudio Interface
 [RStudio IDE cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
 <div align="center">
-<img src="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2022/images/Rstudio_v4.2.0_add.png" width=400 height=400>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio_v4.2.0_add.png" width=400 height=400>
 </div>
 - Executing commands for the code editor
   + PC window: control + return (enter)
@@ -273,14 +277,14 @@ df[, 2]
 **read.delim**, **read.csv**
 
 ```{r, comment=""}
-cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/data/cs.txt"
+cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/lab_DE/data/cs.txt"
 d <- read.delim(cpm)
 head(d, 3)
 ```
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/cost.png" width=250 height=150>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/cost.png" width=250 height=150>
 </div>
-cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/data/cs.txt"
+cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/lab_DE/data/cs.txt"
 ---
 ### Exporting data
 **write.table()** or **write.csv()**
@@ -314,7 +318,7 @@ High-level plot: create a new plot
 plot(x, y, xlab, ylab, main, …)
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/plot.png" width=500 height=450>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/plot.png" width=500 height=450>
 </div>
 
 ---
@@ -405,7 +409,7 @@ Learning R at [swirlstats](http://swirlstats.com)
 ---
 ### Adventure with R
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Radventure.png" width=800 height=500>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Radventure.png" width=800 height=500>
 </div>
 http://www.nature.com/news/programming-tools-adventures-with-r-1.16609
 
