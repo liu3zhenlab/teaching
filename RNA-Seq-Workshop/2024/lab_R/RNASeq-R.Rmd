@@ -38,13 +38,13 @@ output:
 
 ***
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Rpopularity.png" width=300 height=400>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rpopularity.png" width=300 height=400>
 </div>
 
 ---
 ### Slides and codes
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/DEsite.jpg" width=300 height=400>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/DEsite.jpg" width=450 height=450>
 </div>
 
 ---

@@ -16,13 +16,13 @@ class: center, middle, inverse, title-slide
 # Lab: Learning R
 ]
 .subtitle[
-## Genomic Technologies Workshop 2022 (PLPTH885)
+## Genomic Technologies Workshop 2024 (PLPTH885)
 ]
 .author[
 ### Sanzhen Liu
 ]
 .date[
-### 6/8/2024
+### 6/5/2024
 ]
 
 ---
@@ -52,10 +52,14 @@ class: center, middle, inverse, title-slide
 
 ***
 &lt;div align="center"&gt;
-&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Rpopularity.png" width=300 height=400&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rpopularity.png" width=300 height=400&gt;
 &lt;/div&gt;
 
-
+---
+### Slides and codes
+&lt;div align="center"&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/DEsite.jpg" width=450 height=450&gt;
+&lt;/div&gt;
 
 ---
 ### R example 1 (R for statistics)
@@ -91,7 +95,7 @@ X-squared = 7.8894e-31, df = 1, p-value = 1
 ### R example 2 (R for graphs)
 
 ``` r
-ts="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/utils/xcard.R"
+ts="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/lab_DE/utils/xcard.R"
 source(ts)
 ```
 
@@ -99,7 +103,7 @@ source(ts)
 ### R example 3 (R for graphs)
 
 ``` r
-cs="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2022/utils//trend.R"
+cs="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/lab_DE/utils/trend.R"
 source(cs)
 ```
 
@@ -112,7 +116,7 @@ source(cs)
 https://www.rstudio.com/products/rstudio/
 
 &lt;div align="center"&gt;
-&lt;img src="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2022/images/install_rstudio_add.png" width=500 height=500&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/install_rstudio_add.png" width=500 height=500&gt;
 &lt;/div&gt;
 
 ---
@@ -127,7 +131,7 @@ https://www.rstudio.com/products/rstudio/
 ### RStudio Interface
 [RStudio IDE cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
 &lt;div align="center"&gt;
-&lt;img src="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2022/images/Rstudio_v4.2.0_add.png" width=400 height=400&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio_v4.2.0_add.png" width=400 height=400&gt;
 &lt;/div&gt;
 - Executing commands for the code editor
   + PC window: control + return (enter)
@@ -467,7 +471,7 @@ df[, 2]
 
 
 ``` r
-cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/data/cs.txt"
+cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/lab_DE/data/cs.txt"
 d &lt;- read.delim(cpm)
 head(d, 3)
 ```
@@ -479,9 +483,9 @@ head(d, 3)
 3 Sep-02     3413.80        61448422
 ```
 &lt;div align="center"&gt;
-&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/cost.png" width=250 height=150&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/cost.png" width=250 height=150&gt;
 &lt;/div&gt;
-cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/data/cs.txt"
+cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/lab_DE/data/cs.txt"
 ---
 ### Exporting data
 **write.table()** or **write.csv()**
@@ -516,7 +520,7 @@ High-level plot: create a new plot
 plot(x, y, xlab, ylab, main, …)
 
 &lt;div align="center"&gt;
-&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/plot.png" width=500 height=450&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/plot.png" width=500 height=450&gt;
 &lt;/div&gt;
 
 ---
@@ -652,7 +656,7 @@ Learning R at [swirlstats](http://swirlstats.com)
 ---
 ### Adventure with R
 &lt;div align="center"&gt;
-&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Radventure.png" width=800 height=500&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Radventure.png" width=800 height=500&gt;
 &lt;/div&gt;
 http://www.nature.com/news/programming-tools-adventures-with-r-1.16609
 
