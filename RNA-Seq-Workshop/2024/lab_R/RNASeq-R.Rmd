@@ -30,8 +30,8 @@ output:
 
 ---
 ### Why R?
-- R is great at statistical computing and graphics
 - R is a free software
+- R is great at statistical computing and graphics
 - R has great community supports ([CRAN repository](https://cran.r-project.org/web/packages/), Bioconductor, GitHub)
 
 [r-project.org](https://www.r-project.org/about.html)
@@ -45,6 +45,43 @@ output:
 ### Slides and codes
 <div align="center">
 <img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/DEsite.jpg" width=450 height=450>
+</div>
+https://github.com/liu3zhenlab/teaching/tree/master/RNA-Seq-Workshop/2024/forYOU
+
+---
+### OnDemand at Beocat
+[ondemand](https://ondemand.beocat.ksu.edu/)
+https://ondemand.beocat.ksu.edu
+
+login with eID
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Ondemand.png" width=750 height=75>
+</div>
+
+---
+### Select RStudio
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/app_menu.png" width=200 height=500>
+</div>
+
+---
+### Request resources
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio_ondemand.png" width=600 height=500>
+</div>
+
+---
+### Connect to RStudio
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio_job.png" width=750 height=250>
+</div>
+
+---
+### Rstudio interface
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio.png" width=650 height=500>
 </div>
 
 ---
@@ -106,21 +143,7 @@ https://www.rstudio.com/products/rstudio/
 
 ---
 ### Setup working directory
-Working directory is the defult folder for input and output data.
-
-```{r, comment="",eval=FALSE}
-dir.create("~/learnR") # create a directory for this practice.
-setwd("~/learnR") # setup working directory.
-```
----
-### Install package
-
-[R packages](https://r-pkgs.org/intro.html) contains many functions developed R community.
-
-```{r, comment="",eval=FALSE}
-install.packages("learnr")
-library("learnr")
-```
+Working directory is the default folder for input and output data.
 
 ---
 ### Getting started, R commands
