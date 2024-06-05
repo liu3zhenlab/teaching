@@ -42,49 +42,6 @@ output:
 </div>
 
 ---
-### Slides and codes
-<div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/DEsite.jpg" width=450 height=450>
-</div>
-https://github.com/liu3zhenlab/teaching/tree/master/RNA-Seq-Workshop/2024/forYOU
-
----
-### OnDemand at Beocat
-[ondemand](https://ondemand.beocat.ksu.edu/)
-https://ondemand.beocat.ksu.edu
-
-login with eID
-
-<div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Ondemand.png" width=750 height=75>
-</div>
-
----
-### Select RStudio
-<div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/app_menu.png" width=200 height=500>
-</div>
-
----
-### Request resources
-<div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio_ondemand.png" width=600 height=500>
-</div>
-
----
-### Connect to RStudio
-<div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio_job.png" width=750 height=250>
-</div>
-
----
-### Rstudio interface
-
-<div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio.png" width=650 height=500>
-</div>
-
----
 ### R example 1 (R for statistics)
 
 Chi-square test
@@ -132,6 +89,49 @@ https://www.rstudio.com/products/rstudio/
   + Download and install [Rstudio](https://www.rstudio.com/products/RStudio/)
 
 ---
+### Slides and codes
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/DEsite.jpg" width=450 height=450>
+</div>
+https://github.com/liu3zhenlab/teaching/tree/master/RNA-Seq-Workshop/2024/forYOU
+
+---
+### OnDemand at Beocat
+[ondemand](https://ondemand.beocat.ksu.edu/)
+https://ondemand.beocat.ksu.edu
+
+login with eID
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Ondemand.png" width=750 height=75>
+</div>
+
+---
+### Select RStudio
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/app_menu.png" width=200 height=500>
+</div>
+
+---
+### Request resources
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio_ondemand.png" width=600 height=500>
+</div>
+
+---
+### Connect to RStudio
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio_job.png" width=750 height=250>
+</div>
+
+---
+### Rstudio interface
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio.png" width=650 height=500>
+</div>
+
+---
 ### RStudio Interface
 [RStudio IDE cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
 <div align="center">
@@ -144,6 +144,10 @@ https://www.rstudio.com/products/rstudio/
 ---
 ### Setup working directory
 Working directory is the default folder for input and output data.
+
+```{r, comment=""}
+setwd("/Users/liu3zhen/Downloads")
+```
 
 ---
 ### Getting started, R commands
