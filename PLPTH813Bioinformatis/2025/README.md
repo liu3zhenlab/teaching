@@ -57,5 +57,5 @@ All student activities in the University, including this course, are governed by
 #### Statement for Copyright Notification
 Copyright 2018 Sanzhen Liu as to this syllabus and all lectures.  During this course students are prohibited from selling notes to or being paid for taking notes by any person or commercial firm without the express written permission of the professor teaching this course.
 
-#### AI Statement
+#### AI Policy
 This course encourages and embraces the ethical use of Artificial Intelligence (AI). As a student in this course, you will sometimes be required to incorporate AI tools in your work. Our use of AI will allow us to develop our understanding of this technology and examine the complex challenges and opportunities it offers to us, both as students and future professionals. In accordance with university policies around academic integrity in the Student Code of Conduct, we will be transparent in our use of AI in the completion of any classroom tasks. Using an AI tool to generate assignment content without proper attribution would be a violation of [the K-State Honor Pledge](https://www.k-state.edu/honor/basics/pledge.html).
