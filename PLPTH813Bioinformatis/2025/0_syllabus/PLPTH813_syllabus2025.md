@@ -17,6 +17,12 @@ PLPTH813 will cover the basic principle of regular bioinformatics applications a
 
 Participation 5%, Homework 30%, Midterm Exam 20%, Project 15%, final Exam 30%
 
+####Time and location of exams
+
+Midterm: March 13th, 10:30-12:20 Th4031
+
+Final: May 15th, 9:40-11:30am Th4031
+
 #### Intended course content
 
 **PART 1**. Useful Unix tools and R programming
