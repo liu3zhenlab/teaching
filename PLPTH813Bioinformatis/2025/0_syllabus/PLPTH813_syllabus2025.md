@@ -7,7 +7,7 @@
 **Location**: 4031 Throckmorton Plant Sciences Center  
 **Time**: Tuesday, Thursday 10:30am-11:20pm (lectures); Thursday 12:30-2:00pm (lab)  
 **Office**: 4729 Throckmorton Plant Sciences Center  
-**Office hours**: Tuesday 12:00-1pm  
+**Office hours**: Tuesday 11:30-12:30pm  
 
 #### Goals of the course
 
