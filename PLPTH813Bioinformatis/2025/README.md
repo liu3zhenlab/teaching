@@ -7,7 +7,7 @@
 **Location**:        4031 Throckmorton Plant Sciences Center  
 **Time**:               Tuesday, Thursday 10:30am-11:20pm (lectures); Thursday 12:30-2:00pm (lab)  
 **Office**:             4729 Throckmorton Plant Sciences Center  
-**Office hours**: Tuesday 11:30-12:30pm  
+**Office hours**: Tuesday 11:30-12:30pm, 4729 Throckmorton Plant Sciences Center  
 
 #### Goals of the course
 PLPTH813 will cover the basic principle of regular bioinformatics applications and emphasize the practice of bioinformatics in biological research. The course will introduce some useful computation skills, such as Unix commands, R, and Python, and then will apply these computational skills throughout the course. This course will be focused on the application of bioinformatics in next-generation sequencing (NGS) data analysis, including variant discovery, genotyping, RNA-seq, genome assembly, comparative genomics and so on. The ultimate goal of this course is to help students to be prepared for using powerful computational resources and effectively handling biological data, particularly large genomic data.  
