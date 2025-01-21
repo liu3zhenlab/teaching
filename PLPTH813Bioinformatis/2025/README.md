@@ -30,7 +30,7 @@ Participation 5%, Homework 30%, Midterm Exam 20%, Project 15%, final Exam 30%
 1. Introduction of NGS technologies
 2. Tools for NGS data process and visualization
 
-**PART 4**. Application of NGS in Genomics
+**PART 4**. Genomic applications
 1. Genomic variant discovery
 2. Phylogeny
 3. Genetic mapping (QTL and association)
