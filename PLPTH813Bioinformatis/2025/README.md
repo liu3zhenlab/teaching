@@ -16,7 +16,7 @@ PLPTH813 will cover the basic principle of regular bioinformatics applications a
 Participation 5%, Homework 30%, Midterm Exam 20%, Project 15%, final Exam 30%  
 
 #### Intended course content
-**PART 1**. Useful Unix tools and R programming
+**PART 1**. Useful Unix tools and R/Python programming
 1. Unix/Linux system and useful tools
 2. R introduction and useful R packages
 3. Basic Python
