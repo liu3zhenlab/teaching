@@ -1,0 +1,19 @@
+Talk	Speaker
+S1	Johnathan Antholz
+S2	Lidia Calderon
+S3	Chantelle Croucamp
+S4	Belén Gaete Humada
+S5	Jane Mascarenhas
+S6	Jackie W	Olexa
+S7	Brooke Vogt
+D1	Muhammad Awais Ajmal, Atiqa Rehman
+D2	Sumit Chowdhury, Sandhya Gopisetty
+D3	Aysu Deniz, Victoria Lopez
+D4	Andres F Holguin-Rocha, Yang Zhao
+D5	Volodymyr Kavetskyi, Lauren Apprill
+D6	Sabreena A	Parray, Inisa Shrestha
+D7	Shruthi Pullangari, Joseph Richey
+T1	Hari Balaji Sridhar, Thangam Venkatesan, Sri Nithya Dasari
+T2	Jinan Park, Jingcheng Yu, Ruoying Chen
+T3	Buket Sahin, Chinemerem Onah, Olamide Adesina
+T4	Chandler Day, Luiza Adami, Madison Kessler
