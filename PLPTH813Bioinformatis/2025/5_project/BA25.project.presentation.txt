@@ -3,14 +3,17 @@ T4	1	May1am	"Chandler Day, Luiza Adami, Madison Kessler"	01	Day_Adami_Kessler	01
 D7	2	May1am	"Shruthi Pullangari, Joseph Richey"	02	Pullangari_Richey	02-Pullangari_Richey
 S1	3	May1am	Johnathan Antholz	03	Antholz	03-Antholz
 T3	4	May1am	"Buket Sahin, Chinemerem Onah, Olamide Adesina"	04	Sahin_Onah_Adesina	04-Sahin_Onah_Adesina
+
 D3	5	May6am	"Aysu Deniz, Victoria Lopez"	05	Deniz_Lopez	05-Deniz_Lopez
 S5	6	May6am	Jane Mascarenhas	06	Mascarenhas	06-Mascarenhas
 D5	7	May6am	"Volodymyr Kavetskyi, Lauren Apprill"	07	Kavetskyi_Apprill	07-Kavetskyi_Apprill
 S7	8	May6am	Brooke Vogt	08	Vogt	08-Vogt
+
 D6	9	May8am	Sabreena A	09	Parray	09-Parray
 S3	10	May8am	Chantelle Croucamp	10	Croucamp	10-Croucamp
 T2	11	May8am	"Jinan Park, Jingcheng Yu, Ruoying Chen"	11	Park_Yu_Chen	11-Park_Yu_Chen
 S2	12	May8am	Lidia Calderon	12	Calderon	12-Calderon
+
 S4	13	May8pm	Belén Gaete Humada	13	Humada	13-Humada
 T1	14	May8pm	"Hari Balaji Sridhar, Thangam Venkatesan, Sri Nithya Dasari"	14	Sridhar_Venkatesan_Dasari	14-Sridhar_Venkatesan_Dasari
 D2	15	May8pm	"Sumit Chowdhury, Sandhya Gopisetty"	15	Chowdhury_Gopisetty	15-Chowdhury_Gopisetty
