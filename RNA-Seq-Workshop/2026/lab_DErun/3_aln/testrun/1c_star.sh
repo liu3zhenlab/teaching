@@ -1,0 +1,21 @@
+#!/bin/bash
+perl ../../utils/scripts/STAR.module.sbatch.pl \
+--mem 32 --threads 1 --time 12:00:00 \
+--indir ../../2_trim \
+--dbdir ../../0_ref \
+--fq1feature .R1.pair.fq \
+--fq2feature .R2.pair.fq \
+--alignIntronMax 100000 \
+--alignMatesGapMax 100000 \
+--outSAMattrIHstart 0 \
+--outSAMmultNmax 1 \
+--outSAMstrandField intronMotif  \
+--outFilterIntronMotifs RemoveNoncanonicalUnannotated \
+--outSAMtype "BAM SortedByCoordinate" \
+--quantMode GeneCounts \
+--outFilterMismatchNmax 1 \
+--outFilterMismatchNoverLmax 0.05 \
+--outFilterMatchNmin 40 \
+--outSJfilterReads Unique \
+--outFilterMultimapNmax 1 \
+--outFilterMultimapScoreRange 2

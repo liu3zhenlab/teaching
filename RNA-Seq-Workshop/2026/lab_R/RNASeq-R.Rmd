@@ -1,0 +1,415 @@
+---
+class: inverse,center,middle
+title: "Lab: Learning R"
+subtitle: "Genomic Technologies Workshop 2024 (PLPTH885)"
+author: "Sanzhen Liu"
+date: "6/5/2024"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+### Outlines
+- Introduction of R programming
+
+- Introduction of RStudio's IDE
+
+- Running basic R
+
+  + Data structure (vector and data frame)
+
+  + Data importing and exporting
+
+  + Plotting
+
+  + String operations
+
+---
+### Why R?
+- R is great at statistical computing and graphics
+- R is a free software
+- R has great community supports ([CRAN repository](https://cran.r-project.org/web/packages/), Bioconductor, R-Forge, Github)
+
+[r-project.org](https://www.r-project.org/about.html)
+
+***
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Rpopularity.png" width=300 height=400>
+</div>
+
+
+
+---
+### R example 1 (R for statistics)
+
+Chi-square test
+```{r, comment=""}
+d <- c(12, 36, 24, 70)
+dm <- matrix(d, nrow=2, byrow=T)
+dm
+chisq.test(dm)
+```
+```{r, echo=FALSE}
+#options(bitmapType = 'cairo')
+#Sys.setenv("DISPLAY"=":0.0")
+```
+
+---
+### R example 2 (R for graphs)
+```{r xcard, echo=T, eval=F, fig.height = 5, results='hide', dev='png', fig.align='center'}
+ts="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/utils/xcard.R"
+source(ts)
+```
+
+---
+### R example 3 (R for graphs)
+```{r cost, echo=T, fig.height = 6.5, fig.width = 10, results='hide', dev='png', fig.align='center'}
+cs="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2022/utils//trend.R"
+source(cs)
+```
+
+---
+### How to run R?
+**Rstudio** is an open source integrated development environment (IDE) for R.
+
+https://www.rstudio.com/products/rstudio/
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2022/images/install_rstudio_add.png" width=500 height=500>
+</div>
+
+---
+### Install RStudio
+* On your own machine (Rstudio Desktop)
+
+  + Download and install [R](https://cloud.r-project.org/)
+  
+  + Download and install [Rstudio](https://www.rstudio.com/products/RStudio/)
+
+---
+### RStudio Interface
+[RStudio IDE cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
+<div align="center">
+<img src="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2022/images/Rstudio_v4.2.0_add.png" width=400 height=400>
+</div>
+- Executing commands for the code editor
+  + PC window: control + return (enter)
+  + Apple MAC: command + return (enter)
+
+---
+### Setup working directory
+Working directory is the defult folder for input and output data.
+
+```{r, comment="",eval=FALSE}
+dir.create("~/learnR") # create a directory for this practice.
+setwd("~/learnR") # setup working directory.
+```
+---
+### Install package
+
+[R packages](https://r-pkgs.org/intro.html) contains many functions developed R community.
+
+```{r, comment="",eval=FALSE}
+install.packages("learnr")
+library("learnr")
+```
+
+---
+### Getting started, R commands
+**Expression**: evaluated, printed, and the value lost
+```{r, comment=""}
+2 + 4
+68 * 0.15
+```
+---
+### Assignment
+assign values to a variable  
+the value passed to a variable but NOT printed
+
+_assignment operator_: **<-** or **=**
+
+```{r, comment=""}
+y <- 2 
+y = 2 
+y
+info <- "hello world"
+cat(info)
+```
+
+---
+### Notes
+- Comments (#):
+Notes to scripts, starting with a hashtag (‘#’), everything to the end of the line is a comment.  
+```{r, comment=""}
+y <- 2 + 4  # an example of the assignment
+```
+
+- Variable names are case senstive
+```{r, comment=""}
+y <- 2
+Y <- 3
+y
+Y
+```
+
+---
+### vector: multiple elements
+A vector is a single entity consisting of an ordered collection of numbers, characters, logical quantities, etc.
+
+concatenate command: **c()**
+
+- Numeric vector  
+  c(10.4, 5.6, 3.1, 6.4, 21.7)
+  
+
+---
+### vector manipulation (I)
+```{r, comment=""}
+# Numeric vector
+x <- c(10.4, 5.6, 3.1, 6.4, 21.7)
+sum(x)
+2*x
+
+### extract 2nd elements
+x[2]
+```
+---
+### vector manipulation (II)
+# Logical vector
+```{r}
+lv <- c(TRUE, FALSE, TRUE, TRUE)
+!lv
+lv == FALSE
+```
+---
+### vector manipulation (III)
+```{r, comment=""}
+# Character vector
+cv <- c("a", "b", "c")
+cv2 <- paste(cv, 1:3, sep="")
+cv2
+
+# Missing value  (NA, not available) 
+mvv <- c("a", "b", "c", NA)
+is.na(mvv)
+```
+
+---
+### vector manipulation (IV)
+Vectors must have their values with the same mode, either numeric, character, logical, or other types.
+**conversion to other modes**
+```{r, comment=""}
+z <- 0:9
+is.numeric(z)
+z
+digits <- as.character(z) # convert to character
+digits
+d <- as.numeric(digits) # convert to numeric
+d
+```
+
+---
+### vector manipulation (V)
+- Select a subset of a vector
+```{r, comment=""}
+x <- c(4, 5, 7, 3, 9)
+x[c(2, 3)]
+x[x>6]
+x[-c(1, 5)]
+```
+- Modify a vector
+```{r, comment=""}
+x[3] <- 23.1
+c(x, 10.9)
+x[-2]
+length(x) <- 2  # retain just the first 2 values
+x
+```
+---
+### Question
+Can a vector contain different types of elements?
+
+```{r, eval = F}
+c(1, "a")
+c(1, TRUE)
+c(TRUE, "a")
+c(1, "a", TRUE)
+```
+
+---
+### Data frame
+A data frame may be regarded as a matrix (table) with columns possibly of differing modes
+
+- Making data frames
+```{r, comment=""}
+df <- data.frame(name=c("Josh", "rose"), age=c(23, 35))
+df
+```
+
+---
+### Working with a data frame
+```{r, comment=""}
+df
+```
+
+Trying these commands:
+```{r, eval = F}
+head(df, 1)
+tail(df, 1)
+str(df)
+df[2, 1]
+df[2, 2]
+df[2]
+df[, 2]
+```
+
+---
+### Importing data
+**read.table()**: to read a data frame (table)  
+**read.delim**, **read.csv**
+
+```{r, comment=""}
+cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/data/cs.txt"
+d <- read.delim(cpm)
+head(d, 3)
+```
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/cost.png" width=250 height=150>
+</div>
+cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/data/cs.txt"
+---
+### Exporting data
+**write.table()** or **write.csv()**
+
+To write a tab-delimited file
+```{r, eval = F}
+x <- data.frame(a = "pi", b = pi)
+write.table(x, file="foo.txt", sep="\t", row.names=FALSE)
+```
+
+- file="foo.txt": foo.txt is the ouput file name
+- sep="\t": separated by a tab (\t)
+- row.names=FALSE: row names are not included in the output
+
+---
+### Practice by your own
+- Create a data frame  
+
+  three columns: 1. Name 2. Major 3. Gender  
+  three rows (entries): your neighbors and you
+
+- Write the data frame to an output file
+
+- Read the file to R and add one more column
+(e.g., favorite color)
+
+---
+### Plotting: plot()
+High-level plot: create a new plot
+
+plot(x, y, xlab, ylab, main, …)
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/plot.png" width=500 height=450>
+</div>
+
+---
+### Adding contents to a plot
+Low-level plot: add to an existing plot
+- add points  
+**points()**
+
+- add lines  
+**lines()**
+
+- add text or legend  
+**text()**  
+**legend()**
+
+---
+### Scatter plot
+```{r scatter, echo=T, fig.height = 5, results='hide', dev='png', fig.align='center'}
+area <- state.x77[, "Area"]
+pop <- state.x77[, "Population"]
+# scatter plot
+plot(area, pop, main="US1977")
+# label points
+points(area["Kansas"], pop["Kansas"], col="purple",
+       lwd=2, pch=19, cex=2)
+```
+
+---
+### Boxplot
+```{r boxplot, echo=T, fig.height = 6, results='hide', dev='png', fig.align='center'}
+barplot(pop/1000, las=2, cex.names=0.65, ylab="Pop (x1000,000)",
+        main="US 1977 Population")
+```
+
+---
+### Histogram
+```{r histogram, echo=T, fig.height = 6, results='hide', dev='png', fig.align='center'}
+hist(pop, ylab="Number of states", main="US 1977 Population")
+```
+
+---
+### String operations - nchar
+**nchar()**
+nchar the sizes of the corresponding elements of a vector.
+
+```{r, comment=""}
+cvec <- c("google", "hello", "the", "world")
+nchar(cvec)
+```
+
+---
+### String operations - grep
+**grep()**
+grep searches for matches to argument pattern within each element of a character vector
+
+```{r, comment=""}
+cvec
+grep("o", cvec)
+```
+---
+### String operations – sub and gsub
+**sub()** and **gsub()**
+sub and gsub perform replacement of the first and all matches respectively.
+
+```{r, comment=""}
+cvec
+sub("o", "O", cvec)
+gsub("o", "O", cvec)
+```
+
+---
+### Getting help
+Usage of commands
+- help(nchar)
+- ?nchar
+- ??colsum
+
+[R Reference Card](https://cran.r-project.org/doc/contrib/Short-refcard.pdf)
+
+- [stack overflow](https://stackoverflow.com/)
+- [google](https://google.com)
+
+Learning R at [swirlstats](http://swirlstats.com)
+
+[education.rstudio.com](https://education.rstudio.com)
+
+
+---
+### Adventure with R
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Radventure.png" width=800 height=500>
+</div>
+http://www.nature.com/news/programming-tools-adventures-with-r-1.16609
+
+
+```{r, echo=FALSE}
+Sys.setenv("DISPLAY"=":0.0")
+```
