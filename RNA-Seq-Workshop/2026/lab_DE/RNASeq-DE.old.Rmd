@@ -129,13 +129,15 @@ kable(tail(grc, 1), row.names = F) %>%
 ---
 ### RPKM normalization
 ```{r, comment="", results="hide", message = F, error = F}
-datacols <- c("trt1", "trt2", "trt3",
-              "ctl1", "ctl2", "ctl3")
+datacols <- c("ck_rep1", "ck_rep2", "ck_rep3",
+              "trt_rep1", "trt_rep2", "trt_rep3")
 lib.sizes <- colSums(grc[, datacols]) # library sizes
+exon.sizes <- grc$ExonSize
 grcn <- normalization(counts = grc,
                       normcolname = datacols,
                       libsize = lib.sizes,
-                      methods = "RPM")
+                      exonsize = exon.sizes,
+                      methods = "RPKM")
 ```
 
 ```{r, comment="", echo = F}
@@ -150,7 +152,7 @@ kable(grcn[1:2, ]) %>%
 - count information
 ```{r, comment=""}
 geneid <- grc$Gene
-in.data <- as.matrix(grc[, 2:7])
+in.data <- as.matrix(grc[, 3:8])
 ```
 
 ```{r, comment="", echo=F, message = F, error = F}
@@ -164,7 +166,7 @@ kable(head(in.data, 1)) %>%
 ### sample names and grouping information (treatment)
 ```{r, comment=""}
 sample.ids <- colnames(in.data)
-treatment <- c("trt", "trt", "trt", "ctl", "ctl", "ctl")
+treatment <- c("ck", "ck", "ck", "trt", "trt", "trt")
 sample.info <- data.frame(row.names=sample.ids, trt=treatment)
 ```
 ```{r, comment="", echo=F, message = F, error = F}
@@ -203,19 +205,19 @@ out <- data.frame(out)
 ```
 
 ```{r, echo=F, comment="", results='asis'}
-kable(out[1:7])  %>%
+kable(out[1:2, 1:7])  %>%
       kable_styling(font_size = 14,
                     position = "left",
                     full_width = F)
 cat("<br>")
 
-kable(out[1, 8:13])  %>%
+kable(out[1:2, 8:12])  %>%
       kable_styling(font_size = 14,
                     position = "left",
                     full_width = F)
 cat("<br>")
 
-kable(out[1, 14:ncol(out)])  %>%
+kable(out[1:2, 13:ncol(out)])  %>%
       kable_styling(font_size = 14,
                     position = "left",
                     full_width = F)
@@ -250,8 +252,8 @@ Please modify the plot code to change the figure title to "DE"
 ---
 ### scatter plot - raw counts
 ```{r, fig.height = 5, dev='png', fig.align='center'}
-x.raw <- out$ctl1
-y.raw <- out$ctl2
+x.raw <- out$ck_rep1
+y.raw <- out$ck_rep2
 drange <- range(x.raw, y.raw, finite=T)
 # plot a scatter plot between two samples
 plot(x.raw, y.raw,
@@ -265,10 +267,10 @@ abline(a = 0, b = 1, col = "orange")
 ---
 ### scatter plot - RPKM
 ```{r, fig.height = 5, dev='png', fig.align='center'}
-x <- log(out$ctl1.RPKM)
-y <- log(out$ctl2.RPKM)
+x <- log(out$ck_rep1.RPKM)
+y <- log(out$ck_rep2.RPKM)
 drange <- range(x, y, finite=T)
-plot(x, y, main = "log of RPM",
+plot(x, y, main = "log of RPKM",
      xlab = "control rep1", ylab = "control rep2",
      xlim = drange, ylim = drange)
 abline(a = 0, b = 1, col = "orange")
@@ -277,8 +279,8 @@ abline(a = 0, b = 1, col = "orange")
 ---
 ### pair-wise scatter plots
 ```{r, fig.height = 6, dev='png', fig.align='center'}
-logrpm <- log(out[, 8:13])
-pairs(logrpm, lower.panel=panel.smooth, upper.panel=panel.cor2)
+logrpkm <- log(out[, 9:14])
+pairs(logrpkm, lower.panel=panel.smooth, upper.panel=panel.cor2)
 ```
 
 ---
@@ -309,18 +311,24 @@ gpa_improve(our.gpa, 0.2)
 ```
 
 ---
+<style>
+code {
+  font-size: 10px;
+}
+</style>
+
 ### PCA function
 
 **principal component analysis and ploting**
 ```{r, eval = F}
 rnaseq.pca <- function(norm.data,  
-  norm.feature="RPM", 
-  group.feature,  
-  title="",  
+  norm.feature="RPKM",  
+	group.feature,  
+	title="",  
   shape.code=NULL,  
-  mean.cutoff=0.1,  
-  colors=NULL,
-  scaling=T, ...) {  
+	mean.cutoff=0.1,  
+	colors=NULL,
+	scaling=T, ...) {  
 	…  
 }
 ```
@@ -329,9 +337,9 @@ rnaseq.pca <- function(norm.data,
 ### PCA plotting
 ```{r, fig.height = 5.5, dev='png', fig.align='center'}
 rnaseq.pca(out, norm.feature="RPKM",
-group.feature=c("ck", "trt"), shape.code=c(5, 16),
-mean.cutoff=0.1, cex=3, scaling = T,
-title="PCA", colors=c("dark green","orange"))
+    group.feature=c("ck", "trt"), shape.code=c(5, 16),
+    mean.cutoff=0.1, cex=3, scaling = T,
+    title="PCA", colors=c("dark green","orange"))
 ```
 
 ---
