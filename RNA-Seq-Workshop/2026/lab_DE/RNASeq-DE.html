@@ -7,6 +7,8 @@
     <script src="libs/header-attrs-2.27/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
@@ -16,16 +18,26 @@ class: center, middle, inverse, title-slide
 # Lab: Differential Expression via RNA-Seq Analysis
 ]
 .subtitle[
-## Genomic Technologies Workshop 2024 (PLPTH885)
+## Genomic Technologies Workshop 2026 (PLPTH885)
 ]
 .author[
 ### Sanzhen Liu
 ]
 .date[
-### 6/5/2024
+### 6/10/2026
 ]
 
 ---
+
+&lt;style&gt;
+pre {
+  font-size: 16px;
+}
+
+code {
+  font-size: 10px;
+}
+&lt;/style&gt;
 
 ### Outline
 - Differential expression test using DESeq2
@@ -34,7 +46,7 @@ class: center, middle, inverse, title-slide
 
 
 ### Course webpage
-[RNA-seq DE analysis](https://github.com/liu3zhenlab/teaching/tree/master/RNA-Seq-Workshop/2024)
+[RNA-seq DE analysis](https://github.com/liu3zhenlab/teaching/tree/master/RNA-Seq-Workshop/2026)
 
 
 
@@ -51,26 +63,26 @@ login with eID
 ---
 ### Select RStudio
 &lt;div align="center"&gt;
-&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/app_menu.png" width=200 height=500&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/app_menu.png" width=200 height=500&gt;
 &lt;/div&gt;
 
 ---
 ### Request resources
 &lt;div align="center"&gt;
-&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio_ondemand.png" width=600 height=500&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/Rstudio_ondemand.png" width=600 height=500&gt;
 &lt;/div&gt;
 
 ---
 ### Connect to RStudio
 &lt;div align="center"&gt;
-&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio_job.png" width=750 height=250&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/Rstudio_job.png" width=750 height=250&gt;
 &lt;/div&gt;
 
 ---
 ### Rstudio interface
 
 &lt;div align="center"&gt;
-&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Rstudio.png" width=650 height=500&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/Rstudio.png" width=650 height=500&gt;
 &lt;/div&gt;
 
 ---
@@ -83,26 +95,40 @@ if (!require("BiocManager", quietly=T))
 # to solve a version issue, install matrixStats to update the version
 # suggested by Adam Tygart from Beocat
 
-install.packages("matrixStats", repos="http://cran.us.r-project.org")
+install.packages("matrixStats",
+                 repos="http://cran.us.r-project.org")
+```
 
+```
+## 
+## The downloaded binary packages are in
+## 	/var/folders/rk/s3y6c45d20g5y41nv62hysy40000gp/T//RtmpUhEWdv/downloaded_packages
+```
+
+``` r
 if (!require("DESeq2", quietly=T))
   BiocManager::install("DESeq2") # DESeq2
 ```
 
+
+
 ---
+
 ### preload modules
 
 ``` r
-data_url &lt;- "https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/lab_DE"
-pls &lt;- paste0(data_url, "/utils/load.R")
-source(pls)
+githubpage &lt;- "https://raw.githubusercontent.com/liu3zhenlab/teaching/"
+data_url &lt;- paste0(githubpage, "/master/RNA-Seq-Workshop/2026/lab_DE")
+preload_r &lt;- paste0(data_url, "/utils/load.R")
+
+source(preload_r)
 ```
 
 - panel.cor2
 - rnaseq.pca
 - normalization
 
-[codes](https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/lab_DE/utils/load.R)
+[codes](https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/lab_DE/utils/load.R)
 
 ---
 ### Read expression data (Read counts per gene)
@@ -119,16 +145,60 @@ nrow(grc)  # the number of rows/lines
 ```
 
 first entry:
-
-|Gene             | ExonSize| ck_rep1| ck_rep2| ck_rep3| trt_rep1| trt_rep2| trt_rep3|
-|:----------------|--------:|-------:|-------:|-------:|--------:|--------:|--------:|
-|AC147602.5_FG004 |      483|    5480|    6075|    5934|     3370|     5784|     6432|
+&lt;table class="table" style="font-size: 14px; width: auto !important; "&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Gene &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ExonSize &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep3 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep3 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AC147602.5_FG004 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 483 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5480 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6075 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5934 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3370 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5784 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6432 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 last entry:
-
-|      |Gene          | ExonSize| ck_rep1| ck_rep2| ck_rep3| trt_rep1| trt_rep2| trt_rep3|
-|:-----|:-------------|--------:|-------:|-------:|-------:|--------:|--------:|--------:|
-|22697 |GRMZM5G899985 |      615|     267|     327|     348|       83|      342|      403|
+&lt;table class="table" style="font-size: 14px; width: auto !important; "&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Gene &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ExonSize &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep3 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep3 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; GRMZM5G899985 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 615 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 267 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 327 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 348 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 342 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 403 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 ---
 ### RPKM normalization
@@ -145,11 +215,60 @@ grcn &lt;- normalization(counts = grc,
                       methods = "RPKM")
 ```
 
-
-|Gene             | ExonSize| ck_rep1| ck_rep2| ck_rep3| trt_rep1| trt_rep2| trt_rep3| ck_rep1.RPKM| ck_rep2.RPKM| ck_rep3.RPKM| trt_rep1.RPKM| trt_rep2.RPKM| trt_rep3.RPKM|
-|:----------------|--------:|-------:|-------:|-------:|--------:|--------:|--------:|------------:|------------:|------------:|-------------:|-------------:|-------------:|
-|AC147602.5_FG004 |      483|    5480|    6075|    5934|     3370|     5784|     6432|      854.123|      895.760|      904.373|       567.493|       915.326|       916.971|
-|AC148152.3_FG005 |     1422|     187|     295|     377|      169|      158|      563|        9.900|       14.775|       19.516|         9.666|         8.493|        27.262|
+&lt;table class="table" style="font-size: 12px; width: auto !important; "&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Gene &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ExonSize &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep3 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep3 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep1.RPKM &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep2.RPKM &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep3.RPKM &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep1.RPKM &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep2.RPKM &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep3.RPKM &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AC147602.5_FG004 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 483 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5480 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6075 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5934 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3370 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5784 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6432 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 854.123 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 895.760 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 904.373 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 567.493 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 915.326 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 916.971 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AC148152.3_FG005 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1422 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 187 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 295 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 377 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 169 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 158 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 563 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.900 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.775 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.516 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.666 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.493 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27.262 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 ---
 ### data organization for DESeq2
@@ -160,10 +279,28 @@ geneid &lt;- grc$Gene
 in.data &lt;- as.matrix(grc[, 3:8])
 ```
 
-
-| ck_rep1| ck_rep2| ck_rep3| trt_rep1| trt_rep2| trt_rep3|
-|-------:|-------:|-------:|--------:|--------:|--------:|
-|    5480|    6075|    5934|     3370|     5784|     6432|
+&lt;table class="table" style="font-size: 14px; width: auto !important; "&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep3 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep3 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5480 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6075 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5934 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3370 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5784 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6432 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 ---
 ### sample names and grouping information (treatment)
@@ -173,15 +310,40 @@ sample.ids &lt;- colnames(in.data)
 treatment &lt;- c("ck", "ck", "ck", "trt", "trt", "trt")
 sample.info &lt;- data.frame(row.names=sample.ids, trt=treatment)
 ```
-
-|         |trt |
-|:--------|:---|
-|ck_rep1  |ck  |
-|ck_rep2  |ck  |
-|ck_rep3  |ck  |
-|trt_rep1 |trt |
-|trt_rep2 |trt |
-|trt_rep3 |trt |
+&lt;table class="table" style="font-size: 14px; width: auto !important; "&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;  &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; trt &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; ck_rep1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ck &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; ck_rep2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ck &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; ck_rep3 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ck &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; trt_rep1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; trt &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; trt_rep2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; trt &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; trt_rep3 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; trt &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 ---
 ### Differential expression test
@@ -218,25 +380,98 @@ out &lt;- merge(grcn, res, by = "Gene")
 out &lt;- data.frame(out)
 ```
 
+&lt;table class="table" style="font-size: 14px; width: auto !important; "&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Gene &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ExonSize &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep3 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep2 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AC147602.5_FG004 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 483 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5480 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6075 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5934 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3370 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5784 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AC148152.3_FG005 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1422 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 187 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 295 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 377 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 169 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 158 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
-|Gene             | ExonSize| ck_rep1| ck_rep2| ck_rep3| trt_rep1| trt_rep2|
-|:----------------|--------:|-------:|-------:|-------:|--------:|--------:|
-|AC147602.5_FG004 |      483|    5480|    6075|    5934|     3370|     5784|
-|AC148152.3_FG005 |     1422|     187|     295|     377|      169|      158|
+&lt;br&gt;&lt;table class="table" style="font-size: 14px; width: auto !important; "&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep3 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep1.RPKM &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep2.RPKM &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ck_rep3.RPKM &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep1.RPKM &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 6432 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 854.123 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 895.760 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 904.373 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 567.493 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 563 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.900 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.775 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.516 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.666 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
-
-
-| trt_rep3| ck_rep1.RPKM| ck_rep2.RPKM| ck_rep3.RPKM| trt_rep1.RPKM|
-|--------:|------------:|------------:|------------:|-------------:|
-|     6432|      854.123|      895.760|      904.373|       567.493|
-|      563|        9.900|       14.775|       19.516|         9.666|
-
-
-
-| trt_rep2.RPKM| trt_rep3.RPKM|  baseMean| log2FoldChange|    pvalue|      padj|
-|-------------:|-------------:|---------:|--------------:|---------:|---------:|
-|       915.326|       916.971| 5441.6579|     -0.1490702| 0.4642180| 0.8049379|
-|         8.493|        27.262|  285.5493|      0.0431574| 0.9258171| 0.9845702|
+&lt;br&gt;&lt;table class="table" style="font-size: 14px; width: auto !important; "&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep2.RPKM &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt_rep3.RPKM &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; baseMean &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; log2FoldChange &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; pvalue &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; padj &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 915.326 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 916.971 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5441.6579 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.1490702 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.4642180 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.8049379 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 8.493 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27.262 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 285.5493 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0431574 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.9258171 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.9845702 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 ---
 #### significant gene sets at different FDRs
@@ -264,10 +499,11 @@ sig &lt;- out[!is.na(out$padj) &amp; out$padj &lt; 0.05, ]
 
 ``` r
 pvals &lt;- out$pvalue
-hist(pvals, main="Histogram",xlab="p-values",ylab="Number of genes")
+hist(pvals, main="Histogram",
+     xlab="p-values",ylab="Number of genes")
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
 
 **problem**  
 Please modify the plot code to change the figure title to "DE"
@@ -280,13 +516,15 @@ x.raw &lt;- out$ck_rep1
 y.raw &lt;- out$ck_rep2
 drange &lt;- range(x.raw, y.raw, finite=T)
 # plot a scatter plot between two samples
-plot(x.raw, y.raw, main = "Raw counts",
-     xlab="control rep1", ylab="control rep2",
+plot(x.raw, y.raw,
+     main = "Raw counts",
+     xlab="control rep1",
+     ylab="control rep2",
      xlim = drange, ylim = drange)
 abline(a = 0, b = 1, col = "orange")
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ### scatter plot - RPKM
@@ -301,7 +539,7 @@ plot(x, y, main = "log of RPKM",
 abline(a = 0, b = 1, col = "orange")
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ### pair-wise scatter plots
@@ -311,7 +549,7 @@ logrpkm &lt;- log(out[, 9:14])
 pairs(logrpkm, lower.panel=panel.smooth, upper.panel=panel.cor2)
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ### Principal Component Analysis (PCA)
@@ -353,6 +591,12 @@ gpa_improve(our.gpa, 0.2)
 ```
 
 ---
+&lt;style&gt;
+code {
+  font-size: 10px;
+}
+&lt;/style&gt;
+
 ### PCA function
 
 **principal component analysis and ploting**
@@ -374,12 +618,13 @@ rnaseq.pca &lt;- function(norm.data,
 ### PCA plotting
 
 ``` r
-rnaseq.pca(out, norm.feature="RPKM", group.feature=c("ck", "trt"),
-           cex=3, shape.code=c(5, 16), mean.cutoff=0.1, scaling = T,
-           title="PCA-all genes", colors=c("dark green","orange"))
+rnaseq.pca(out, norm.feature="RPKM",
+    group.feature=c("ck", "trt"), shape.code=c(5, 16),
+    mean.cutoff=0.1, cex=3, scaling = T,
+    title="PCA", colors=c("dark green","orange"))
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ### MA plot
@@ -396,17 +641,23 @@ points(aval[sig.set], mval[sig.set], pch=19,cex=0.3,col="red")
 abline(h = 0, cex = 1, col = "dark green")
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ### Volcano plot
+&lt;style&gt;
+pre.sourceCode {
+  font-size: 8px;
+}
+&lt;/style&gt;
 
 ``` r
 log2val &lt;- out$log2FoldChange  # log2 fold change
 mlogP &lt;- -log10(out$pvalue) # transformed p-values
 ### plot
-plot(log2val, mlogP, main="Volcano plot", xlab="log2FC", ylab="-log10(p)",
-     pch=19, cex=0.4, col="grey", xlim=c(-6,6), ylim=c(0,16))
+plot(log2val, mlogP, main="Volcano plot",
+     xlab="log2FC", ylab="-log10(p)", pch=19,
+     cex=0.4, col="grey", xlim=c(-6,6), ylim=c(0,16))
 ### highlight
 up &lt;- which(out$padj&lt;0.05 &amp; log2val &gt; 0) # up
 down &lt;- which(out$padj&lt;0.05 &amp; log2val &lt; 0)  # down
@@ -414,7 +665,7 @@ points(log2val[up], mlogP[up], pch=19,cex=0.4,col="brown")
 points(log2val[down], mlogP[down],pch=19,cex=0.4,col="blue")
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Summary of the analyzing procedure
@@ -438,10 +689,9 @@ Manhattan, KS 66506-5502
 phone: 785-532-1379  
 
 [liu3zhen@ksu.edu](liu3zhen@ksu.edu)  
-twitter: [liu3zhen](https://twitter.com/liu3zhen?lang=en)
 
 ### Bioinformatics Applications
-PLPTH813, Spring 2025
+PLPTH813, Spring 2027
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

@@ -16,13 +16,13 @@ class: center, middle, inverse, title-slide
 # Lab: Learning R
 ]
 .subtitle[
-## Genomic Technologies Workshop 2022 (PLPTH885)
+## Genomic Technologies Workshop 2026 (PLPTH885)
 ]
 .author[
 ### Sanzhen Liu
 ]
 .date[
-### 6/8/2024
+### 6/10/2026
 ]
 
 ---
@@ -425,7 +425,8 @@ A data frame may be regarded as a matrix (table) with columns possibly of differ
 - Making data frames
 
 ``` r
-df &lt;- data.frame(name=c("Josh", "rose"), age=c(23, 35))
+df &lt;- data.frame(name=c("Josh", "rose"),
+                 age=c(23, 35))
 df
 ```
 
@@ -490,7 +491,10 @@ To write a tab-delimited file
 
 ``` r
 x &lt;- data.frame(a = "pi", b = pi)
-write.table(x, file="foo.txt", sep="\t", row.names=FALSE)
+write.table(x,
+            file="foo.txt",
+            sep="\t",
+            row.names=FALSE)
 ```
 
 - file="foo.txt": foo.txt is the ouput file name
@@ -541,8 +545,10 @@ pop &lt;- state.x77[, "Population"]
 # scatter plot
 plot(area, pop, main="US1977")
 # label points
-points(area["Kansas"], pop["Kansas"], col="purple",
-       lwd=2, pch=19, cex=2)
+points(area["Kansas"],
+       pop["Kansas"],
+       col="purple", lwd=2,
+       pch=19, cex=2)
 ```
 
 &lt;img src="RNASeq-R_files/figure-html/scatter-1.png" style="display: block; margin: auto;" /&gt;
@@ -551,7 +557,8 @@ points(area["Kansas"], pop["Kansas"], col="purple",
 ### Boxplot
 
 ``` r
-barplot(pop/1000, las=2, cex.names=0.65, ylab="Pop (x1000,000)",
+barplot(pop/1000, las=2, cex.names=0.65,
+        ylab="Pop (x1000,000)",
         main="US 1977 Population")
 ```
 
@@ -641,21 +648,12 @@ Usage of commands
 
 [R Reference Card](https://cran.r-project.org/doc/contrib/Short-refcard.pdf)
 
-- [stack overflow](https://stackoverflow.com/)
 - [google](https://google.com)
+- [chatGPT](https://chatgpt.com/)
 
 Learning R at [swirlstats](http://swirlstats.com)
 
 [education.rstudio.com](https://education.rstudio.com)
-
-
----
-### Adventure with R
-&lt;div align="center"&gt;
-&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Radventure.png" width=800 height=500&gt;
-&lt;/div&gt;
-http://www.nature.com/news/programming-tools-adventures-with-r-1.16609
-
 
 
     </textarea>

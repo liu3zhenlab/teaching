@@ -1,9 +1,9 @@
 ---
 class: inverse,center,middle
 title: "Lab: Learning R"
-subtitle: "Genomic Technologies Workshop 2024 (PLPTH885)"
+subtitle: "Genomic Technologies Workshop 2026 (PLPTH885)"
 author: "Sanzhen Liu"
-date: "6/5/2024"
+date: "6/10/2026"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -246,7 +246,8 @@ A data frame may be regarded as a matrix (table) with columns possibly of differ
 
 - Making data frames
 ```{r, comment=""}
-df <- data.frame(name=c("Josh", "rose"), age=c(23, 35))
+df <- data.frame(name=c("Josh", "rose"),
+                 age=c(23, 35))
 df
 ```
 
@@ -288,7 +289,10 @@ cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Works
 To write a tab-delimited file
 ```{r, eval = F}
 x <- data.frame(a = "pi", b = pi)
-write.table(x, file="foo.txt", sep="\t", row.names=FALSE)
+write.table(x,
+            file="foo.txt",
+            sep="\t",
+            row.names=FALSE)
 ```
 
 - file="foo.txt": foo.txt is the ouput file name
@@ -338,14 +342,17 @@ pop <- state.x77[, "Population"]
 # scatter plot
 plot(area, pop, main="US1977")
 # label points
-points(area["Kansas"], pop["Kansas"], col="purple",
-       lwd=2, pch=19, cex=2)
+points(area["Kansas"],
+       pop["Kansas"],
+       col="purple", lwd=2,
+       pch=19, cex=2)
 ```
 
 ---
 ### Boxplot
 ```{r boxplot, echo=T, fig.height = 6, results='hide', dev='png', fig.align='center'}
-barplot(pop/1000, las=2, cex.names=0.65, ylab="Pop (x1000,000)",
+barplot(pop/1000, las=2, cex.names=0.65,
+        ylab="Pop (x1000,000)",
         main="US 1977 Population")
 ```
 
@@ -394,21 +401,12 @@ Usage of commands
 
 [R Reference Card](https://cran.r-project.org/doc/contrib/Short-refcard.pdf)
 
-- [stack overflow](https://stackoverflow.com/)
 - [google](https://google.com)
+- [chatGPT](https://chatgpt.com/)
 
 Learning R at [swirlstats](http://swirlstats.com)
 
 [education.rstudio.com](https://education.rstudio.com)
-
-
----
-### Adventure with R
-<div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Radventure.png" width=800 height=500>
-</div>
-http://www.nature.com/news/programming-tools-adventures-with-r-1.16609
-
 
 ```{r, echo=FALSE}
 Sys.setenv("DISPLAY"=":0.0")

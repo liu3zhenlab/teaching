@@ -11,8 +11,17 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-
 ---
+<style>
+pre {
+  font-size: 16px;
+}
+
+code {
+  font-size: 10px;
+}
+</style>
+
 ### Outline
 - Differential expression test using DESeq2
 
@@ -63,26 +72,37 @@ login with eID
 
 ---
 ### Package installation
-```{r, eval = T, error=T, message=F, warning=F}
+```{r, eval = T, error=F, message=F, warning=F}
 if (!require("BiocManager", quietly=T))
   install.packages("BiocManager")
 
 # to solve a version issue, install matrixStats to update the version
 # suggested by Adam Tygart from Beocat
 
-install.packages("matrixStats", repos="http://cran.us.r-project.org")
+install.packages("matrixStats",
+                 repos="http://cran.us.r-project.org")
 
 if (!require("DESeq2", quietly=T))
   BiocManager::install("DESeq2") # DESeq2
 
 ```
 
+```{r, comment="", message = F, error = F, echo=F}
+#if (!require("kabelExtra", quietly=T))
+#  install.packages("kabelExtra")
+
+library(kableExtra)
+```
+
 ---
+
 ### preload modules
 ```{r, error=FALSE, message=FALSE}
-data_url <- "https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/lab_DE"
-pls <- paste0(data_url, "/utils/load.R")
-source(pls)
+githubpage <- "https://raw.githubusercontent.com/liu3zhenlab/teaching/"
+data_url <- paste0(githubpage, "/master/RNA-Seq-Workshop/2026/lab_DE")
+preload_r <- paste0(data_url, "/utils/load.R")
+
+source(preload_r)
 ```
 
 - panel.cor2
@@ -102,12 +122,18 @@ nrow(grc)  # the number of rows/lines
 
 first entry:
 ```{r, comment="", message = F, error = F, echo=F}
-kable(head(grc, 1))  # show the first row
+kable(head(grc, 1), row.names = F) %>%
+      kable_styling(font_size = 14,
+                    position = "left",
+                    full_width = F)  # show the first row
 ```
 
 last entry:
 ```{r, comment="", message = F, error = F, echo=F}
-kable(tail(grc, 1))  # show the last row
+kable(tail(grc, 1), row.names = F) %>%
+      kable_styling(font_size = 14,
+                    position = "left",
+                    full_width = F)  # show the last row
 ```
 
 ---
@@ -125,7 +151,10 @@ grcn <- normalization(counts = grc,
 ```
 
 ```{r, comment="", echo = F}
-kable(grcn[1:2, ])
+kable(grcn[1:2, ]) %>%
+      kable_styling(font_size = 12,
+                    position = "left",
+                    full_width = F)
 ```
 
 ---
@@ -137,7 +166,10 @@ in.data <- as.matrix(grc[, 3:8])
 ```
 
 ```{r, comment="", echo=F, message = F, error = F}
-kable(head(in.data, 1))
+kable(head(in.data, 1)) %>%
+      kable_styling(font_size = 14,
+                    position = "left",
+                    full_width = F)
 ```
 
 ---
@@ -148,7 +180,10 @@ treatment <- c("ck", "ck", "ck", "trt", "trt", "trt")
 sample.info <- data.frame(row.names=sample.ids, trt=treatment)
 ```
 ```{r, comment="", echo=F, message = F, error = F}
-kable(sample.info)
+kable(sample.info) %>%
+      kable_styling(font_size = 14,
+                    position = "left",
+                    full_width = F)
 ```
 
 ---
@@ -179,10 +214,23 @@ out <- merge(grcn, res, by = "Gene")
 out <- data.frame(out)
 ```
 
-```{r, echo=F, comment=""}
-kable(out[1:2, 1:7])
-kable(out[1:2, 8:12])
-kable(out[1:2, 13:ncol(out)])
+```{r, echo=F, comment="", results='asis'}
+kable(out[1:2, 1:7])  %>%
+      kable_styling(font_size = 14,
+                    position = "left",
+                    full_width = F)
+cat("<br>")
+
+kable(out[1:2, 8:12])  %>%
+      kable_styling(font_size = 14,
+                    position = "left",
+                    full_width = F)
+cat("<br>")
+
+kable(out[1:2, 13:ncol(out)])  %>%
+      kable_styling(font_size = 14,
+                    position = "left",
+                    full_width = F)
 ```
 
 ---
@@ -204,7 +252,8 @@ sig <- out[!is.na(out$padj) & out$padj < 0.05, ]
 ### p-value histogram
 ```{r, fig.height = 5, dev='png', fig.align='center'}
 pvals <- out$pvalue
-hist(pvals, main="Histogram",xlab="p-values",ylab="Number of genes")
+hist(pvals, main="Histogram",
+     xlab="p-values",ylab="Number of genes")
 ```
 
 **problem**  
@@ -217,8 +266,10 @@ x.raw <- out$ck_rep1
 y.raw <- out$ck_rep2
 drange <- range(x.raw, y.raw, finite=T)
 # plot a scatter plot between two samples
-plot(x.raw, y.raw, main = "Raw counts",
-     xlab="control rep1", ylab="control rep2",
+plot(x.raw, y.raw,
+     main = "Raw counts",
+     xlab="control rep1",
+     ylab="control rep2",
      xlim = drange, ylim = drange)
 abline(a = 0, b = 1, col = "orange")
 ```
@@ -270,6 +321,12 @@ gpa_improve(our.gpa, 0.2)
 ```
 
 ---
+<style>
+code {
+  font-size: 10px;
+}
+</style>
+
 ### PCA function
 
 **principal component analysis and ploting**
@@ -289,9 +346,10 @@ rnaseq.pca <- function(norm.data,
 ---
 ### PCA plotting
 ```{r, fig.height = 5.5, dev='png', fig.align='center'}
-rnaseq.pca(out, norm.feature="RPKM", group.feature=c("ck", "trt"),
-           cex=3, shape.code=c(5, 16), mean.cutoff=0.1, scaling = T,
-           title="PCA-all genes", colors=c("dark green","orange"))
+rnaseq.pca(out, norm.feature="RPKM",
+    group.feature=c("ck", "trt"), shape.code=c(5, 16),
+    mean.cutoff=0.1, cex=3, scaling = T,
+    title="PCA", colors=c("dark green","orange"))
 ```
 
 ---
@@ -310,12 +368,18 @@ abline(h = 0, cex = 1, col = "dark green")
 
 ---
 ### Volcano plot
+<style>
+pre.sourceCode {
+  font-size: 8px;
+}
+</style>
 ```{r, fig.height = 4, dev='png', fig.align='center'}
 log2val <- out$log2FoldChange  # log2 fold change
 mlogP <- -log10(out$pvalue) # transformed p-values
 ### plot
-plot(log2val, mlogP, main="Volcano plot", xlab="log2FC", ylab="-log10(p)",
-     pch=19, cex=0.4, col="grey", xlim=c(-6,6), ylim=c(0,16))
+plot(log2val, mlogP, main="Volcano plot",
+     xlab="log2FC", ylab="-log10(p)", pch=19,
+     cex=0.4, col="grey", xlim=c(-6,6), ylim=c(0,16))
 ### highlight
 up <- which(out$padj<0.05 & log2val > 0) # up
 down <- which(out$padj<0.05 & log2val < 0)  # down
@@ -345,7 +409,6 @@ Manhattan, KS 66506-5502
 phone: 785-532-1379  
 
 [liu3zhen@ksu.edu](liu3zhen@ksu.edu)  
-X [liu3zhen](https://twitter.com/liu3zhen?lang=en)
 
 ### Bioinformatics Applications
 PLPTH813, Spring 2027
