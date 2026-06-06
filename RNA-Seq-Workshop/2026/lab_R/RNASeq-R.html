@@ -145,7 +145,7 @@ setwd("~/learnR") # setup working directory.
 ---
 ### Install package
 
-[R packages](https://r-pkgs.org/intro.html) contains many functions developed R community.
+[R packages](https://r-pkgs.org/intro.html) contains all kinds of useful functions.
 
 
 ``` r
@@ -545,10 +545,8 @@ pop &lt;- state.x77[, "Population"]
 # scatter plot
 plot(area, pop, main="US1977")
 # label points
-points(area["Kansas"],
-       pop["Kansas"],
-       col="purple", lwd=2,
-       pch=19, cex=2)
+points(area["Kansas"], pop["Kansas"],
+       col="purple", lwd=2, pch=19, cex=2)
 ```
 
 &lt;img src="RNASeq-R_files/figure-html/scatter-1.png" style="display: block; margin: auto;" /&gt;
