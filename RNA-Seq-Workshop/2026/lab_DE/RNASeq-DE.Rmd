@@ -12,16 +12,6 @@ output:
       highlightLines: true
       countIncrementalSlides: false
 ---
-<style>
-pre {
-  font-size: 16px;
-}
-
-code {
-  font-size: 10px;
-}
-</style>
-
 ### Outline
 - Differential expression test using DESeq2
 
