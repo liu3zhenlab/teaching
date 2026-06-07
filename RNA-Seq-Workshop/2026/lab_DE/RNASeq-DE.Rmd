@@ -256,27 +256,23 @@ Please modify the plot code to change the figure title to "DE"
 
 ---
 ### scatter plot - raw counts
-```{r, fig.height = 5, dev='png', fig.align='center'}
-x.raw <- out$ctl1
-y.raw <- out$ctl2
+```{r, fig.height = 5.5, dev='png', fig.align='center'}
+x.raw <- out$ctl1;  y.raw <- out$ctl2
 drange <- range(x.raw, y.raw, finite=T)
 # plot a scatter plot between two samples
-plot(x.raw, y.raw, main = "Raw counts",
-     xlab="control rep1", ylab="control rep2",
-     xlim = drange, ylim = drange)
+plot(x.raw, y.raw, main="Raw counts", xlab="Rep1",
+     ylab="Rep2", xlim=drange, ylim=drange)
 abline(a = 0, b = 1, col = "orange")
 ```
 
 ---
-### scatter plot - RPKM
-```{r, fig.height = 5, dev='png', fig.align='center'}
-x <- log(out$ctl1.RPM)
-y <- log(out$ctl2.RPM)
+### scatter plot - RPM
+```{r, fig.height = 5.5, dev='png', fig.align='center'}
+x <- log(out$ctl1.RPM);  y <- log(out$ctl2.RPM)
 drange <- range(x, y, finite=T)
-plot(x, y, main = "log of RPM",
-     xlab = "control rep1", ylab = "control rep2",
-     xlim = drange, ylim = drange)
-abline(a = 0, b = 1, col = "orange")
+plot(x, y, main="log of RPM", xlab="Rep1",
+     ylab="Rep2", xlim=drange, ylim=drange)
+abline(a = 0, b = 1, col="orange")
 ```
 
 ---
@@ -362,11 +358,71 @@ plot(log2val, mlogP, main="Volcano plot", xlab="log2FC",
  ylab="-log10(p)",pch=19,cex=0.4,col="grey",xlim=c(-6,6),ylim=c(0,16))
 ### highlight
 up <- which(out$padj<0.05 & log2val > 0) # up
-down <- which(out$padj<0.05 & log2val < 0)  # down
+dn <- which(out$padj<0.05 & log2val < 0)  # down
 points(log2val[up], mlogP[up], pch=19,cex=0.4,col="brown")
-points(log2val[down], mlogP[down],pch=19,cex=0.4,col="blue")
+points(log2val[dn], mlogP[dn],pch=19,cex=0.4,col="blue")
 ```
 
+---
+# Gene Ontology enrichment - package installation
+
+### clusterProfiler
+
+```{r, comment="", message=F, warning=F, results="hide"}
+if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+if (!require("clusterProfiler", quietly = TRUE)) BiocManager::install("clusterProfiler")
+if (!require("ggplot2", quietly = TRUE)) install.packages(ggplot2)
+
+library(GO.db)
+library(ggplot2)
+library(clusterProfiler)
+```
+
+---
+# GO database
+```{r, comment=""}
+# GO DB (2 columns)
+go <- read.delim("https://raw.githubusercontent.com/liu3zhenlab/teaching/refs/heads/master/RNA-Seq-Workshop/2026/lab_DE/data/go.txt", header=F)
+colnames(go) <- c("Gene", "GO")
+go <- go[, c("GO", "Gene")] # switch gene and GO
+is_go_valid <- go$GO %in% keys(GOTERM)
+go <- go[is_go_valid, ]
+```
+
+```{r, comment="", echo=F}
+# show an example
+kable(go[1:8, ])  %>%
+  kable_styling(font_size = 16,
+                position = "left",
+                full_width = F)
+```
+
+---
+# DEG (up- and down-regulated)
+```{r, comment=""}
+up_gene <- out$Gene[up]
+dn_gene <- out$Gene[dn]
+```
+In total, `r length(up_gene)` and `r length(dn_gene)` up- and down-regulated genes were identified, respectively.
+
+
+---
+# GO enrichment test
+```{r, fig.height = 5.5, dev='png', fig.align='center', message=F, warning=F}
+up_enrich <- enricher(up_gene, universe=out$Gene, TERM2GENE=go)
+up_enrich@result$Description <- Term(GOTERM[up_enrich@result$ID])
+up_dp <-dotplot(up_enrich,showCategory=10,title="UP",x="GeneRatio")
+up_dp + aes(y = Description)
+```
+
+---
+# Significant down-regulated
+```{r, fig.height = 5.5, dev='png', fig.align='center', message=F, warning=F}
+dn_enrich <- enricher(gene=dn_gene, universe=out$Gene, TERM2GENE=go)
+dn_enrich@result$Description <- Term(GOTERM[dn_enrich@result$ID])
+dn_dp<-dotplot(dn_enrich,showCategory=10,title="Down",x="GeneRatio")
+dn_dp + aes(y = Description)
+```
 ---
 ## Summary of the analyzing procedure
 
