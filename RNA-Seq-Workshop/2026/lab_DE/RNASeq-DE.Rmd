@@ -62,7 +62,7 @@ login with eID
 
 ---
 ### Package installation
-```{r, eval = T, error=F, message=F, warning=F}
+```{r, eval = T, error=F, message=F, warning=F, results='hide'}
 if (!require("BiocManager", quietly=T))
   install.packages("BiocManager")
 
@@ -71,7 +71,9 @@ if (!require("BiocManager", quietly=T))
 
 install.packages("matrixStats",
                  repos="http://cran.us.r-project.org")
+```
 
+```{r, eval = T, error=F, message=F, warning=F}
 if (!require("DESeq2", quietly=T))
   BiocManager::install("DESeq2") # DESeq2
 
@@ -154,8 +156,8 @@ in.data <- as.matrix(grc[, 2:7])
 ```
 
 ```{r, comment="", echo=F, message = F, error = F}
-kable(head(in.data, 1)) %>%
-      kable_styling(font_size = 14,
+kable(head(in.data, 3)) %>%
+      kable_styling(font_size = 16,
                     position = "left",
                     full_width = F)
 ```
@@ -169,7 +171,7 @@ sample.info <- data.frame(row.names=sample.ids, trt=treatment)
 ```
 ```{r, comment="", echo=F, message = F, error = F}
 kable(sample.info) %>%
-      kable_styling(font_size = 14,
+      kable_styling(font_size = 16,
                     position = "left",
                     full_width = F)
 ```
@@ -234,6 +236,11 @@ Please revise the code to calculate the number of significant genes with the FDR
 ### significantly DEG
 ```{r, comment=""}
 sig <- out[!is.na(out$padj) & out$padj < 0.05, ]
+
+kable(sig[1:2, c(1, 8, 11, 15:ncol(sig))])  %>%
+      kable_styling(font_size = 16,
+                    position = "left",
+                    full_width = F)
 ```
 
 ---

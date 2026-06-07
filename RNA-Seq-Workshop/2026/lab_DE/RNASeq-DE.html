@@ -89,11 +89,6 @@ install.packages("matrixStats",
                  repos="http://cran.us.r-project.org")
 ```
 
-```
-## 
-## The downloaded binary packages are in
-## 	/var/folders/rk/s3y6c45d20g5y41nv62hysy40000gp/T//RtmpRdGZkW/downloaded_packages
-```
 
 ``` r
 if (!require("DESeq2", quietly=T))
@@ -260,7 +255,7 @@ geneid &lt;- grc$Gene
 in.data &lt;- as.matrix(grc[, 2:7])
 ```
 
-&lt;table class="table" style="font-size: 14px; width: auto !important; "&gt;
+&lt;table class="table" style="font-size: 16px; width: auto !important; "&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:right;"&gt; trt1 &lt;/th&gt;
@@ -280,6 +275,22 @@ in.data &lt;- as.matrix(grc[, 2:7])
    &lt;td style="text-align:right;"&gt; 268 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 114 &lt;/td&gt;
   &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 264 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 190 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 199 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 302 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 174 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 208 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -291,7 +302,7 @@ sample.ids &lt;- colnames(in.data)
 treatment &lt;- c("trt", "trt", "trt", "ctl", "ctl", "ctl")
 sample.info &lt;- data.frame(row.names=sample.ids, trt=treatment)
 ```
-&lt;table class="table" style="font-size: 14px; width: auto !important; "&gt;
+&lt;table class="table" style="font-size: 16px; width: auto !important; "&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt;  &lt;/th&gt;
@@ -470,7 +481,46 @@ Please revise the code to calculate the number of significant genes with the FDR
 
 ``` r
 sig &lt;- out[!is.na(out$padj) &amp; out$padj &lt; 0.05, ]
+
+kable(sig[1:2, c(1, 8, 11, 15:ncol(sig))])  %&gt;%
+      kable_styling(font_size = 16,
+                    position = "left",
+                    full_width = F)
 ```
+
+&lt;table class="table" style="font-size: 16px; width: auto !important; "&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;  &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Gene &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; trt1.RPM &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ctl1.RPM &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; log2FoldChange &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; pvalue &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; padj &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 29 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Zm00001eb000370 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 23.064 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 186.472 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.7269522 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00e+00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0000000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 34 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Zm00001eb000420 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 157.123 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 292.204 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.8521164 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.94e-05 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0004824 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 ---
 ### p-value histogram
@@ -481,7 +531,7 @@ hist(pvals, main="Histogram",
      xlab="p-values",ylab="Number of genes")
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
 
 **problem**  
 Please modify the plot code to change the figure title to "DE"
@@ -500,7 +550,7 @@ plot(x.raw, y.raw, main = "Raw counts",
 abline(a = 0, b = 1, col = "orange")
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ### scatter plot - RPKM
@@ -515,7 +565,7 @@ plot(x, y, main = "log of RPM",
 abline(a = 0, b = 1, col = "orange")
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ### pair-wise scatter plots
@@ -525,7 +575,7 @@ logrpm &lt;- log(out[, 8:13])
 pairs(logrpm, lower.panel=panel.smooth, upper.panel=panel.cor2)
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ### Principal Component Analysis (PCA)
@@ -594,7 +644,7 @@ rnaseq.pca(out, norm.feature="RPM",
     title="PCA", colors=c("dark green","orange"))
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ### MA plot
@@ -610,7 +660,7 @@ points(aval[sig.set], mval[sig.set], pch=19,cex=0.3,col="red")
 abline(h = 0, cex = 1, col = "dark green")
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ### Volcano plot
@@ -628,7 +678,7 @@ points(log2val[up], mlogP[up], pch=19,cex=0.4,col="brown")
 points(log2val[down], mlogP[down],pch=19,cex=0.4,col="blue")
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Summary of the analyzing procedure

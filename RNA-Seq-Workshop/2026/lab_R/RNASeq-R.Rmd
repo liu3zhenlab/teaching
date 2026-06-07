@@ -79,7 +79,7 @@ source(trend)
 https://www.rstudio.com/products/rstudio/
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/install_rstudio_add.png" width=750 height=300>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/install_rstudio_add.png" width=750 height=250>
 </div>
 
 ---
@@ -117,6 +117,41 @@ setwd("~/learnR") # setup working directory.
 install.packages("learnr")
 library("learnr")
 ```
+
+---
+### OnDemand at Beocat
+[ondemand](https://ondemand.beocat.ksu.edu/)
+
+login with eID
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2024/images/Ondemand.png" width=750 height=75>
+</div>
+
+---
+### Select RStudio
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/app_menu.png" width=200 height=500>
+</div>
+
+---
+### Request resources
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/Rstudio_ondemand.png" width=600 height=500>
+</div>
+
+---
+### Connect to RStudio
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/Rstudio_job.png" width=750 height=250>
+</div>
+
+---
+### Rstudio interface
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/Rstudio.png" width=650 height=500>
+</div>
 
 ---
 ### Getting started, R commands
@@ -401,10 +436,6 @@ Usage of commands
 
 - [google](https://google.com)
 - [chatGPT](https://chatgpt.com/)
-
-Learning R at [swirlstats](http://swirlstats.com)
-
-[education.rstudio.com](https://education.rstudio.com)
 
 ```{r, echo=FALSE}
 Sys.setenv("DISPLAY"=":0.0")
