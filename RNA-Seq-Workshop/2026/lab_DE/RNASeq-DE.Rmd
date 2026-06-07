@@ -203,19 +203,19 @@ out <- data.frame(out)
 ```
 
 ```{r, echo=F, comment="", results='asis'}
-kable(out[1:7])  %>%
+kable(out[1:2, 1:7])  %>%
       kable_styling(font_size = 14,
                     position = "left",
                     full_width = F)
 cat("<br>")
 
-kable(out[1, 8:13])  %>%
+kable(out[1:2, 8:13])  %>%
       kable_styling(font_size = 14,
                     position = "left",
                     full_width = F)
 cat("<br>")
 
-kable(out[1, 14:ncol(out)])  %>%
+kable(out[1:2, 14:ncol(out)])  %>%
       kable_styling(font_size = 14,
                     position = "left",
                     full_width = F)
@@ -254,10 +254,8 @@ x.raw <- out$ctl1
 y.raw <- out$ctl2
 drange <- range(x.raw, y.raw, finite=T)
 # plot a scatter plot between two samples
-plot(x.raw, y.raw,
-     main = "Raw counts",
-     xlab="control rep1",
-     ylab="control rep2",
+plot(x.raw, y.raw, main = "Raw counts",
+     xlab="control rep1", ylab="control rep2",
      xlim = drange, ylim = drange)
 abline(a = 0, b = 1, col = "orange")
 ```
@@ -340,9 +338,8 @@ rnaseq.pca(out, norm.feature="RPM",
 aval <- log(out$baseMean)
 mval <- out$log2FoldChange
 sig.set <- which(out$padj < 0.05)
-plot(aval, mval, main="MA plot",
-     xlab="log(mean of exp)", ylab="log2FC",
-     ylim=c(-4, 6), pch=19, cex=0.3, col="blue")
+plot(aval, mval, main="MA plot", xlab="log(mean of exp)",
+  ylab="log2FC", ylim=c(-4,6),pch=19,cex=0.3,col="blue")
 # add points and a horizontal line
 points(aval[sig.set], mval[sig.set], pch=19,cex=0.3,col="red")
 abline(h = 0, cex = 1, col = "dark green")
@@ -354,9 +351,8 @@ abline(h = 0, cex = 1, col = "dark green")
 log2val <- out$log2FoldChange  # log2 fold change
 mlogP <- -log10(out$pvalue) # transformed p-values
 ### plot
-plot(log2val, mlogP, main="Volcano plot",
-     xlab="log2FC", ylab="-log10(p)", pch=19,
-     cex=0.4, col="grey", xlim=c(-6,6), ylim=c(0,16))
+plot(log2val, mlogP, main="Volcano plot", xlab="log2FC",
+ ylab="-log10(p)",pch=19,cex=0.4,col="grey",xlim=c(-6,6),ylim=c(0,16))
 ### highlight
 up <- which(out$padj<0.05 & log2val > 0) # up
 down <- which(out$padj<0.05 & log2val < 0)  # down

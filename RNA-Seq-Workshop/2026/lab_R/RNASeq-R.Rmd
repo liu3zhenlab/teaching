@@ -38,7 +38,7 @@ output:
 
 ***
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/Rpopularity.png" width=300 height=400>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/Rpopularity.png" width=300 height=400>
 </div>
 
 
@@ -61,15 +61,15 @@ chisq.test(dm)
 ---
 ### R example 2 (R for graphs)
 ```{r xcard, echo=T, eval=F, fig.height = 5, results='hide', dev='png', fig.align='center'}
-ts="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/utils/xcard.R"
+ts="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/lab_DE/utils/xcard.R"
 source(ts)
 ```
 
 ---
 ### R example 3 (R for graphs)
 ```{r cost, echo=T, fig.height = 6.5, fig.width = 10, results='hide', dev='png', fig.align='center'}
-cs="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2022/utils//trend.R"
-source(cs)
+trend="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/lab_DE/utils/trend.R"
+source(trend)
 ```
 
 ---
@@ -79,7 +79,7 @@ source(cs)
 https://www.rstudio.com/products/rstudio/
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2022/images/install_rstudio_add.png" width=500 height=500>
+<img src="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2026/images/install_rstudio_add.png" width=500 height=500>
 </div>
 
 ---
@@ -94,7 +94,7 @@ https://www.rstudio.com/products/rstudio/
 ### RStudio Interface
 [RStudio IDE cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
 <div align="center">
-<img src="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2022/images/Rstudio_v4.2.0_add.png" width=400 height=400>
+<img src="https://raw.githubusercontent.com/glin0311/teaching/master/RNA-Seq-Workshop/2026/images/Rstudio_v4.2.0_add.png" width=400 height=400>
 </div>
 - Executing commands for the code editor
   + PC window: control + return (enter)
