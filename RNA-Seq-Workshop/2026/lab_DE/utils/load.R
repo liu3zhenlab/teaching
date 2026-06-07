@@ -81,6 +81,8 @@ rnaseq.pca <- function(norm.data, norm.feature="RPKM", group.feature, title="",
   
   ## PCA plot:
   plot(NULL,NULL,xlim=range.x,ylim=range.y,xlab="PC1",ylab="PC2", main=title)
+  plot(NULL,NULL,xlim=range.x,ylim=range.y,
+       xlab="PC1",ylab="PC2", main=title)
   rn <- rownames(pr$rotation)
   for (i in 1:length(group.feature)) {
     points(pr$rotation[grep(group.feature[i],rn),1],
@@ -94,8 +96,10 @@ rnaseq.pca <- function(norm.data, norm.feature="RPKM", group.feature, title="",
     xpos <- pr$rotation[cur_rn, 1]
     ypos <- pr$rotation[cur_rn, 2]
     cur_rn_simple <- sub(group.feature[i], "", cur_rn)
+    cur_rn_simple <- sub("[_\\.]$", "", cur_rn_simple)
     text(xpos, ypos, label=cur_rn_simple,
          col=colors[i], pch=shape.code[i])
+         col="black", pch=shape.code[i], cex=1.5)
   }
   
 #  for (i in 1:3) {
