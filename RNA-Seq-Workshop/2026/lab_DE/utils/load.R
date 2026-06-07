@@ -87,16 +87,26 @@ rnaseq.pca <- function(norm.data, norm.feature="RPKM", group.feature, title="",
            pr$rotation[grep(group.feature[i],rn),2],
            col=colors[i], pch=shape.code[i], ...)
   }
+  
   # rep information:
-  for (i in 1:3) {
-    biorep <- paste("rep",i,sep="")
-    text(pr$rotation[grep(biorep,rn),1],
-         pr$rotation[grep(biorep,rn),2],
-         labels=i,
-         col="black",cex=1)
+  for (i in 1:length(group.feature)) {
+    cur_rn <- grep(group.feature[i],rn,value=T)
+    xpos <- pr$rotation[cur_rn, 1]
+    ypos <- pr$rotation[cur_rn, 2]
+    cur_rn_simple <- sub(group.feature[i], "", cur_rn)
+    text(xpos, ypos, label=cur_rn_simple,
+         col=colors[i], pch=shape.code[i])
   }
+  
+#  for (i in 1:3) {
+#    biorep <- paste("rep",i,sep="")
+#    text(pr$rotation[grep(biorep,rn),1],
+#         pr$rotation[grep(biorep,rn),2],
+#         labels=i, col="black",cex=1)
+#  }
   ### legend:
-  legend("topleft",group.feature,pch=shape.code,cex=1.2,col=colors,bty="n")
+  legend("topleft", group.feature, pch=shape.code,
+         cex=1.2, col=colors, bty="n")
 }
 
 ###

@@ -265,8 +265,8 @@ abline(a = 0, b = 1, col = "orange")
 ---
 ### scatter plot - RPKM
 ```{r, fig.height = 5, dev='png', fig.align='center'}
-x <- log(out$ctl1.RPKM)
-y <- log(out$ctl2.RPKM)
+x <- log(out$ctl1.RPM)
+y <- log(out$ctl2.RPM)
 drange <- range(x, y, finite=T)
 plot(x, y, main = "log of RPM",
      xlab = "control rep1", ylab = "control rep2",
@@ -328,10 +328,10 @@ rnaseq.pca <- function(norm.data,
 ---
 ### PCA plotting
 ```{r, fig.height = 5.5, dev='png', fig.align='center'}
-rnaseq.pca(out, norm.feature="RPKM",
-group.feature=c("ck", "trt"), shape.code=c(5, 16),
-mean.cutoff=0.1, cex=3, scaling = T,
-title="PCA", colors=c("dark green","orange"))
+rnaseq.pca(out, norm.feature="RPM",
+    group.feature=c("trt", "ctl"), shape.code=c(5, 16),
+    mean.cutoff=0.1, cex=3, scaling = T,
+    title="PCA", colors=c("dark green","orange"))
 ```
 
 ---
