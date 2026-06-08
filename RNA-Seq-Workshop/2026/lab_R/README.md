@@ -704,4 +704,4 @@ Mostly relevant when running R remotely on Linux systems with X11 graphics.
 10. Basic plotting (scatter, barplot, histogram)
 11. String searching and replacement
 
-These are the foundational R skills needed before moving into RNA-seq analysis with packages such as **DESeq2**, **edgeR**, and **clusterProfiler**.
+These are the foundational R skills needed before moving into RNA-seq analysis with packages such as **DESeq2** and **clusterProfiler**.
