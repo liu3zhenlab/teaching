@@ -106,13 +106,13 @@ source(trend)
 &lt;img src="RNASeq-R_files/figure-html/cost-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
-### How to run R?
+### Where to run R?
 **Rstudio** is an open source integrated development environment (IDE) for R.
 
-https://www.rstudio.com/products/rstudio/
+https://posit.co/downloads
 
 &lt;div align="center"&gt;
-&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/install_rstudio_add.png" width=750 height=250&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/install_rstudio_add.png" width=500 height=425&gt;
 &lt;/div&gt;
 
 ---
@@ -132,26 +132,6 @@ https://www.rstudio.com/products/rstudio/
 - Executing commands
   + PC window: control + return (enter)
   + Apple MAC: command + return (enter)
-
----
-### Setup working directory
-Working directory is the defult folder for input and output data.
-
-
-``` r
-dir.create("~/learnR") # create a directory for this practice.
-setwd("~/learnR") # setup working directory.
-```
----
-### Install package
-
-[R packages](https://r-pkgs.org/intro.html) contains all kinds of useful functions.
-
-
-``` r
-install.packages("learnr")
-library("learnr")
-```
 
 ---
 ### OnDemand at Beocat
@@ -187,6 +167,16 @@ login with eID
 &lt;div align="center"&gt;
 &lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/Rstudio.png" width=650 height=500&gt;
 &lt;/div&gt;
+
+---
+### Setup working directory
+Working directory is the defult folder for input and output data.
+
+
+``` r
+dir.create("~/rnaseq") # create a directory for this practice.
+setwd("~/rnaseq") # setup working directory.
+```
 
 ---
 ### Getting started, R commands
@@ -515,9 +505,9 @@ head(d, 3)
 3 Sep-02     3413.80        61448422
 ```
 &lt;div align="center"&gt;
-&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/cost.png" width=250 height=150&gt;
+&lt;img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/cost.png" width=320 height=200&gt;
 &lt;/div&gt;
-cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/data/cs.txt"
+
 ---
 ### Exporting data
 **write.table()** or **write.csv()**

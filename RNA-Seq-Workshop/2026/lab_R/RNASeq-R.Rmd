@@ -73,13 +73,13 @@ source(trend)
 ```
 
 ---
-### How to run R?
+### Where to run R?
 **Rstudio** is an open source integrated development environment (IDE) for R.
 
-https://www.rstudio.com/products/rstudio/
+https://posit.co/downloads
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/install_rstudio_add.png" width=750 height=250>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/install_rstudio_add.png" width=500 height=425>
 </div>
 
 ---
@@ -99,24 +99,6 @@ https://www.rstudio.com/products/rstudio/
 - Executing commands
   + PC window: control + return (enter)
   + Apple MAC: command + return (enter)
-
----
-### Setup working directory
-Working directory is the defult folder for input and output data.
-
-```{r, comment="",eval=FALSE}
-dir.create("~/learnR") # create a directory for this practice.
-setwd("~/learnR") # setup working directory.
-```
----
-### Install package
-
-[R packages](https://r-pkgs.org/intro.html) contains all kinds of useful functions.
-
-```{r, comment="",eval=FALSE}
-install.packages("learnr")
-library("learnr")
-```
 
 ---
 ### OnDemand at Beocat
@@ -152,6 +134,15 @@ login with eID
 <div align="center">
 <img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/Rstudio.png" width=650 height=500>
 </div>
+
+---
+### Setup working directory
+Working directory is the defult folder for input and output data.
+
+```{r, comment="",eval=FALSE}
+dir.create("~/rnaseq") # create a directory for this practice.
+setwd("~/rnaseq") # setup working directory.
+```
 
 ---
 ### Getting started, R commands
@@ -314,9 +305,9 @@ d <- read.delim(cpm)
 head(d, 3)
 ```
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/cost.png" width=250 height=150>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/cost.png" width=320 height=200>
 </div>
-cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/data/cs.txt"
+
 ---
 ### Exporting data
 **write.table()** or **write.csv()**
