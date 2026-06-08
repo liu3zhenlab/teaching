@@ -449,6 +449,10 @@ Blue = downregulated genes.
 # **18. Load GO enrichment packages**
 
 ```r
+if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+if (!require("clusterProfiler", quietly = TRUE)) BiocManager::install("clusterProfiler")
+if (!require("ggplot2", quietly = TRUE)) install.packages(ggplot2)
+
 library(GO.db)
 library(clusterProfiler)
 library(ggplot2)
