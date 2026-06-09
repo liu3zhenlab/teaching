@@ -188,10 +188,17 @@ kable(sample.info) %>%
 ---
 ### Differential expression test
 
-```{r, comment="", results="hide", message=F, warning=F}
+#### Data organized for DESeq2
+```{r, comment="", message=F, warning=F}
 dds <- DESeqDataSetFromMatrix(countData=in.data,
                               colData=sample.info,
                               formula(~trt))
+
+dds
+```
+
+#### DESeq2 test
+```{r, comment="", results="hide", message=F, warning=F}
 dds <- DESeq(dds)
 ```
 
@@ -245,7 +252,9 @@ Please revise the code to calculate the number of significant genes with the FDR
 ### significantly DEG
 ```{r, comment=""}
 sig <- out[!is.na(out$padj) & out$padj < 0.05, ]
+```
 
+```{r, comment="", echo=F, message = F, error = F}
 kable(sig[1:2, c(1, 8, 11, 15:ncol(sig))])  %>%
       kable_styling(font_size = 16,
                     position = "left",

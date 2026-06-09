@@ -60,7 +60,7 @@ chisq.test(dm)
 
 ---
 ### R example 2 (R for graphs)
-```{r xcard, echo=T, eval=F, fig.height = 5, results='hide', dev='png', fig.align='center'}
+```{r xcard, echo=T, fig.height = 5, results='hide', dev='png', fig.align='center'}
 ts="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/lab_DE/utils/xcard.R"
 source(ts)
 ```
