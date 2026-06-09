@@ -66,11 +66,14 @@ login with eID
 if (!require("BiocManager", quietly=T))
   install.packages("BiocManager")
 
-# to solve a version issue, install matrixStats to update the version
-# suggested by Adam Tygart from Beocat
+if (!require("ggplot2", quietly=T))
+  install.packages("https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.5.1.tar.gz",
+    repos = NULL, type = "source"
+  )
+```
 
-install.packages("matrixStats",
-                 repos="http://cran.us.r-project.org")
+```{r, echo=F, comment="", message = F, error = F}
+BiocManager::version()
 ```
 
 ```{r, eval = T, error=F, message=F, warning=F}
@@ -79,9 +82,14 @@ if (!require("DESeq2", quietly=T))
 
 ```
 
-```{r, comment="", message = F, error = F, echo=F}
-#if (!require("kabelExtra", quietly=T))
-#  install.packages("kabelExtra")
+```{r, eval = T, error=F, message=F, warning=F}
+if (!require("clusterProfiler", quietly=T))
+    BiocManager::install("clusterProfiler")
+```
+
+```{r, echo=F, comment="", message = F, error = F}
+if (!require("kableExtra", quietly=T))
+  install.packages("kableExtra")
 
 library(kableExtra)
 ```
@@ -369,10 +377,6 @@ points(log2val[dn], mlogP[dn],pch=19,cex=0.4,col="blue")
 ### clusterProfiler
 
 ```{r, comment="", message=F, warning=F, results="hide"}
-if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
-if (!require("clusterProfiler", quietly = TRUE)) BiocManager::install("clusterProfiler")
-if (!require("ggplot2", quietly = TRUE)) install.packages(ggplot2)
-
 library(GO.db)
 library(ggplot2)
 library(clusterProfiler)
