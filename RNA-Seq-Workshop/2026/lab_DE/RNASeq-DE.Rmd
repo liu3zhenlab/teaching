@@ -72,7 +72,7 @@ if (!require("ggplot2", quietly=T))
   )
 ```
 
-```{r, echo=F, comment="", message = F, error = F}
+```{r, eval=F, echo=F, comment="", message = F, error = F}
 BiocManager::version()
 ```
 
