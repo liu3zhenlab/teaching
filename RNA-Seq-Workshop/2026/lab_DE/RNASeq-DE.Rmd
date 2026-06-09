@@ -62,27 +62,28 @@ login with eID
 
 ---
 ### Package installation
+
+#### DESeq2 installation
 ```{r, eval = T, error=F, message=F, warning=F, results='hide'}
 if (!require("BiocManager", quietly=T))
   install.packages("BiocManager")
 
-if (!require("ggplot2", quietly=T))
-  install.packages("https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.5.1.tar.gz",
-    repos = NULL, type = "source"
-  )
-```
-
-```{r, eval=F, echo=F, comment="", message = F, error = F}
-BiocManager::version()
-```
-
-```{r, eval = T, error=F, message=F, warning=F}
 if (!require("DESeq2", quietly=T))
   BiocManager::install("DESeq2") # DESeq2
-
 ```
 
+#### ClusterProfiler
 ```{r, eval = T, error=F, message=F, warning=F}
+if (!require("ggplot2", quietly=T)) {
+  biocmanger_version <- BiocManager::version()
+  if (biocmanger_version == "3.18") {
+    install.packages("https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.5.1.tar.gz",
+    repos = NULL, type = "source")
+  } else {
+    install.packages("ggplot2")
+  }
+}
+
 if (!require("clusterProfiler", quietly=T))
     BiocManager::install("clusterProfiler")
 ```

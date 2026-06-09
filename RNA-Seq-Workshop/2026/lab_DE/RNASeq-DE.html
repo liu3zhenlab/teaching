@@ -78,26 +78,29 @@ login with eID
 ---
 ### Package installation
 
+#### DESeq2 installation
+
 ``` r
 if (!require("BiocManager", quietly=T))
   install.packages("BiocManager")
 
-if (!require("ggplot2", quietly=T))
-  install.packages("https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.5.1.tar.gz",
-    repos = NULL, type = "source"
-  )
-```
-
-
-
-
-``` r
 if (!require("DESeq2", quietly=T))
   BiocManager::install("DESeq2") # DESeq2
 ```
 
+#### ClusterProfiler
 
 ``` r
+if (!require("ggplot2", quietly=T)) {
+  biocmanger_version &lt;- BiocManager::version()
+  if (biocmanger_version == "3.18") {
+    install.packages("https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.5.1.tar.gz",
+    repos = NULL, type = "source")
+  } else {
+    install.packages("ggplot2")
+  }
+}
+
 if (!require("clusterProfiler", quietly=T))
     BiocManager::install("clusterProfiler")
 ```
@@ -538,7 +541,7 @@ hist(pvals, main="Histogram",
      xlab="p-values",ylab="Number of genes")
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
 
 **problem**  
 Please modify the plot code to change the figure title to "DE"
@@ -555,7 +558,7 @@ plot(x.raw, y.raw, main="Raw counts", xlab="Rep1",
 abline(a = 0, b = 1, col = "orange")
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ### scatter plot - RPM
@@ -568,7 +571,7 @@ plot(x, y, main="log of RPM", xlab="Rep1",
 abline(a = 0, b = 1, col="orange")
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ### pair-wise scatter plots
@@ -578,7 +581,7 @@ logrpm &lt;- log(out[, 8:13])
 pairs(logrpm, lower.panel=panel.smooth, upper.panel=panel.cor2)
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ### Principal Component Analysis (PCA)
@@ -647,7 +650,7 @@ rnaseq.pca(out, norm.feature="RPM",
     title="PCA", colors=c("dark green","orange"))
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ### MA plot
@@ -663,7 +666,7 @@ points(aval[sig.set], mval[sig.set], pch=19,cex=0.3,col="red")
 abline(h = 0, cex = 1, col = "dark green")
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ### Volcano plot
@@ -681,7 +684,7 @@ points(log2val[up], mlogP[up], pch=19,cex=0.4,col="brown")
 points(log2val[dn], mlogP[dn],pch=19,cex=0.4,col="blue")
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 # Gene Ontology enrichment - package installation
@@ -770,7 +773,7 @@ up_dp &lt;-dotplot(up_enrich,showCategory=10,title="UP",x="GeneRatio")
 up_dp + aes(y = Description)
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 # Significant down-regulated
@@ -782,7 +785,7 @@ dn_dp&lt;-dotplot(dn_enrich,showCategory=10,title="Down",x="GeneRatio")
 dn_dp + aes(y = Description)
 ```
 
-&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="RNASeq-DE_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
 ---
 ## Summary of the analyzing procedure
 
