@@ -362,6 +362,10 @@ Low-level plot: add to an existing plot
 
 ---
 ### Scatter plot
+```{r, echo=F}
+write.table(state.x77, "statex77.txt", quote=F, row.names=F, sep="\t")
+```
+
 ```{r scatter, echo=T, fig.height = 5, results='hide', dev='png', fig.align='center'}
 area <- state.x77[, "Area"]
 pop <- state.x77[, "Population"]
