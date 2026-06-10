@@ -300,12 +300,12 @@ df[, 2]
 **read.delim**, **read.csv**
 
 ```{r, comment=""}
-cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/data/cs.txt"
+cpm="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/lab_DE/data/cs.txt"
 d <- read.delim(cpm)
 head(d, 3)
 ```
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/cost.png" width=320 height=200>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/cost.png" width=320 height=200>
 </div>
 
 ---
@@ -344,7 +344,7 @@ High-level plot: create a new plot
 plot(x, y, xlab, ylab, main, …)
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2022/images/plot.png" width=500 height=450>
+<img src="https://raw.githubusercontent.com/liu3zhenlab/teaching/master/RNA-Seq-Workshop/2026/images/plot.png" width=500 height=450>
 </div>
 
 ---
@@ -361,10 +361,15 @@ Low-level plot: add to an existing plot
 **legend()**
 
 ---
-### Scatter plot
-```{r, echo=F}
-write.table(state.x77, "statex77.txt", quote=F, row.names=F, sep="\t")
+### plot data
+```{r, echo=T}
+if (!exists("state.x77")) {
+  state.x77 <- read.delim("https://raw.githubusercontent.com/liu3zhenlab/teaching/refs/heads/master/RNA-Seq-Workshop/2026/lab_DE/data/statex77.txt", stringsAsFactors = F)
+}
 ```
+
+---
+### Scatter plot
 
 ```{r scatter, echo=T, fig.height = 5, results='hide', dev='png', fig.align='center'}
 area <- state.x77[, "Area"]
